@@ -12,7 +12,7 @@ enum argument_type {
 	ARG_WORD
 };
 
-typedef bool (command_fuction*)(void);
+typedef bool (command_fuction*)(u32 *);
 
 struct command {
 	command_function func;
