@@ -2,7 +2,6 @@
 #define INTERPRETER_H
 
 #include "engine/types.h"
-#include "commands.h"
 
 #define INTERPRETER_MAX_PARAMS 6
 
@@ -12,7 +11,7 @@ enum argument_type {
 	ARG_WORD
 };
 
-typedef bool (command_fuction*)(u32 *);
+typedef bool (*command_function)(u32 *);
 
 struct command {
 	command_function func;
