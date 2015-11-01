@@ -1,0 +1,8 @@
+*.bin
+*.o
+*.zip
+*.gba
+*.sav
+*.sgm
+*.ss*
+build
