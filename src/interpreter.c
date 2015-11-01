@@ -25,26 +25,36 @@ void interpreter_run(void) {
 }
 
 u32 interpreter_parse_arg(enum argument_type arg_length) {
+	u32 output = 0;
+	
 	switch (arg_length) {
 	case ARG_BYTE:
-		return *interpreter_state->program_counter++;
+		output = interpreter_state->program_counter[0];
+		interpreter_state->program_counter++;
+		break;
 
 	case ARG_HWORD:
-		return (*interpreter_state->program_counter++)
-			| (*interpreter_state->program_counter++ << 8);
+		output = (interpreter_state->program_counter[0])
+			| (interpreter_state->program_counter[1] << 8);
+
+		interpreter_state->program_counter += 2;
+		break;
 
 	case ARG_WORD:
-		return (*interpreter_state->program_counter++)
-			| (*interpreter_state->program_counter++ << 8)
-			| (*interpreter_state->program_counter++ << 16)
-			| (*interpreter_state->program_counter++ << 24);
-	default:
-		return 0;
+		output = (interpreter_state->program_counter[0])
+			| (interpreter_state->program_counter[1] << 8)
+			| (interpreter_state->program_counter[2] << 16)
+			| (interpreter_state->program_counter[3] << 24);
+
+		interpreter_state->program_counter += 4;
+		break;
 	}
+
+	return output;
 }
 
 void interpreter_parse(void) {
-	u8 index = interpreter_state->program_counter++;
+	u8 index = *interpreter_state->program_counter++;
 	u8 argc, i;
 	enum argument_type arg_length;
 
