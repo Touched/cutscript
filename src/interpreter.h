@@ -20,8 +20,6 @@ struct command {
 	enum argument_type argument_lengths[INTERPRETER_MAX_PARAMS];
 };
 
-extern struct command command_table[COMMANDS_MAX];
-
 enum interpreter_state {
 	STATE_STOPPED,
 	STATE_PARSE,
@@ -37,6 +35,5 @@ struct interpreter {
 };
 
 extern struct interpreter *interpreter_state;
-
 
 #endif /* INTERPRETER_H */
