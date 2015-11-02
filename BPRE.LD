@@ -4,6 +4,7 @@
 
 /* Functions */
 
+// Cutscene slate clean related
 script_env_2_enable = 0x08069940|1;
 help_system_disable_sp198 = 0x0812B478|1;
 pal_set_something = 0x08070588|1;
@@ -16,6 +17,14 @@ bg_positions_reset = 0x0812D594|1;
 reset_and_init_alot = 0x080F4E24|1;
 help_system_enable_unless_flashback__sp199 = 0x0812B484|1;
 bgid_nullify_tilemap = 0x08001FD4|1;
+
+// memory manipulation cmds related
+load_var_value = 0x0806E568|1;
+var_set_value = 0x0806E584|1;
+var_get_pointer = 0x0806E454|1;
+mem_copy = 0x081E5E78|1;
+malloc = 0x08002B9C|1;
+free = 0x08002BC4|1;
 
 /* Custom data */
 
