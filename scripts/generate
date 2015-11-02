@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+
+import yaml
+
+def generate_c(data):
+    lengths = {
+        1: 'ARG_BYTE',
+	2: 'ARG_HWORD',
+	4: 'ARG_WORD'
+    }
+
+    commands = []
+    functions = []
+    
+    with open('src/commands.h', 'w') as h, open('src/commands.c', 'w') as c:
+        for command in data:
+            name = command['name']
+            args = command['arguments'] if 'arguments' in command else []
+
+            length = len(args)
+            arg_lengths = ', '.join(lengths[arg] for arg in args)
+            commands.append('\t{{ command_{}, {}, {{ {} }} }}'.format(name, length, arg_lengths))
+            functions.append('bool command_{}(u32 *);'.format(name))
+
+        # Generate table
+        print('#include "engine/types.h"', file=c)
+        print('#include "commands.h"\n', file=c)
+        print('\n'.join(functions), file=c)
+        print(file=c)        
+        print('const struct command command_table[COMMANDS_MAX] = {', file=c)
+        print(',\n'.join(commands), file=c)
+        print('};', file=c)
+
+        # Generate header
+        print('#ifndef COMMANDS_H', file=h)
+        print('#define COMMANDS_H\n', file=h)
+        print('#include "interpreter.h"\n', file=h)
+        print('#define COMMANDS_MAX', len(commands), file=h)
+        print('extern const struct command command_table[COMMANDS_MAX];', file=h)
+        print('\n#endif /* COMMANDS_H */', file=h)   
+
+def main():
+    with open('src/commands.yml') as commands:
+        data = yaml.load(commands, Loader=yaml.CLoader)
+
+    generate_c(data)
+
+main()

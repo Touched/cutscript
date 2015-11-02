@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* cutscript commands */
 
 /* Template */
@@ -273,3 +274,27 @@ name: command name
 		wait value frames
 		
 
+=======
+- name: nop
+  description: >
+    nop
+
+    Nothing
+
+- name: end
+  description: >
+    end
+    
+    Terminates the script
+
+- name: goto
+  arguments: [4]
+  description: >
+    goto address
+    
+    Jump to a new script
+    
+    This is a relative jump.
+    
+    address - The value will be added to the program counter.
+>>>>>>> refs/remotes/Touched/master

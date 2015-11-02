@@ -2,7 +2,6 @@
 #define INTERPRETER_H
 
 #include "engine/types.h"
-#include "commands.h"
 
 #define INTERPRETER_MAX_PARAMS 6
 
@@ -12,15 +11,13 @@ enum argument_type {
 	ARG_WORD
 };
 
-typedef bool (command_fuction*)(u32 *);
+typedef bool (*command_function)(u32 *);
 
 struct command {
-	command_function func;
-	u8 argc;
-	enum argument_type argument_lengths[INTERPRETER_MAX_PARAMS];
+	const command_function func;
+	const u8 argc;
+	const enum argument_type argument_lengths[INTERPRETER_MAX_PARAMS];
 };
-
-extern struct command command_table[COMMANDS_MAX];
 
 enum interpreter_state {
 	STATE_STOPPED,
@@ -37,6 +34,5 @@ struct interpreter {
 };
 
 extern struct interpreter *interpreter_state;
-
 
 #endif /* INTERPRETER_H */
