@@ -1,12 +1,5 @@
-@@ -1,30 +1,17 @@
 /* Data */
-/*
- * Data
- */
 
-/*
- * Functions
- */
 
 
 /* Functions */
@@ -31,13 +24,7 @@ var_set_value = 0x0806E584|1;
 var_get_pointer = 0x0806E454|1;
 mem_copy = 0x081E5E78|1;
 malloc = 0x08002B9C|1;
-malloc_and_clear = 0x08002BB0|1;
 free = 0x08002BC4|1;
-malloc_and_clear = 0x08002BB0|1;
 
+/* Custom data */
 
-/*
- * Custom Data
- */
-
-interpreter_state = 0x02036E30;

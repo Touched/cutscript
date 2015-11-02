@@ -1,14 +1,14 @@
 <<<<<<< HEAD
-/* cutscript commands */
+# cutscript commands 
 
-/* Template */
+# Template 
 name: command name
 	arguements: [arg byte count]
 	description: >
 		(Paramater) -> [local data written to by cmd] --> return value upon complete
 		
 
-/* Priority control flow */
+# Priority control flow 
 
 -name: goto
 	arguements: [1]
@@ -35,7 +35,7 @@ name: command name
 		if p1 condition p2 is true, scr_cursor = label
 		
 
-/* Priority variable access */
+# Priority variable access 
 -name: var_load
 	arguements: [2]
 	description: >
@@ -88,7 +88,7 @@ name: command name
 		free malloc memory given ptr in local_var.index.
 		
 	
-/* Priority graphic cmds OAMs */
+# Priority graphic cmds OAMs 
 
 -name: create_oam
 	arguements: [3]
@@ -140,7 +140,7 @@ name: command name
 		update OAM pal to pal. Old pal is overwritten.
 		
 	
-/* Priority graphic cmds Backgrounds */
+# Priority graphic cmds Backgrounds 
 
 -name: load_BG
 	arguements: [4]
@@ -192,7 +192,7 @@ name: command name
 		update BG pal to pal. Old pal is overwritten.
 		
 	
-/* Priority Utility cmds */
+# Priority Utility cmds 
 -name: pal_fade
 	arguements: [2]
 	description: >
@@ -217,7 +217,7 @@ name: command name
 		external continue script execution, return to routine call
 		
 	
-/* low priority graphic cmds OAMs */
+# low priority graphic cmds OAMs 
 -name: oam_rotate
 	arguements: [2]
 	description: >
@@ -242,7 +242,7 @@ name: command name
 		
 
 	
-/* low priority control flow */
+# low priority control flow 
 
 -name: do
 	description: >
