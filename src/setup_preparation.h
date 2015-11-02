@@ -10,5 +10,7 @@ void vblank_hander_callback(void);
 void gpu_tile_bg_drop_all_sets(u8);
 void bg_positions_reset(void);
 void reset_and_init_alot(void);
+void bgid_nullify_tilemap(u8);
 u32 *maphook = (u32*)0x3005020;
 void mapldr_continue_scripts_restart_music(void);
+void help_system_enable_unless_flashback__sp199(void);

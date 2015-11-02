@@ -7,7 +7,7 @@ void set_up(void) {
 	pal_set_something(-1, 0, 0, 0x10, 0); // should wait for completion?
 	overworld_free_bgmaps(); // free BGs and rboxes
 	
-	// do unknown magic
+	// do unknown magic - interrupt, so stop drawing to screen maybe?
 	lcd_io_set(0, 0);
 	
 	vblank_hander_set (&vblank_hander_callback);
@@ -20,7 +20,12 @@ void set_up(void) {
 	
 	
 void map_reload(void) {
+	bgid_nullify_tilemap(0);
+	bgid_nullify_tilemap(1);
+	bgid_nullify_tilemap(2);
+	bgid_nullify_tilemap(3);
 	*maphook = (&mapldr_continue_scripts_restart_music);
+	help_system_enable_unless_flashback__sp199();
 }
 
 	

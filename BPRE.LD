@@ -14,7 +14,8 @@ vblank_hander_callback = 0x08046FC0|1;
 gpu_tile_bg_drop_all_sets = 0x08001618|1;
 bg_positions_reset = 0x0812D594|1;
 reset_and_init_alot = 0x080F4E24|1;
-
+help_system_enable_unless_flashback__sp199 = 0x0812B484|1;
+bgid_nullify_tilemap = 0x08001FD4|1;
 
 /* Custom data */
 
