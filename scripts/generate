@@ -27,7 +27,7 @@ def generate_c(data):
         print('#include "commands.h"\n', file=c)
         print('\n'.join(functions), file=c)
         print(file=c)        
-        print('const struct command commnd_table[COMMANDS_MAX] = {', file=c)
+        print('const struct command command_table[COMMANDS_MAX] = {', file=c)
         print(',\n'.join(commands), file=c)
         print('};', file=c)
 
@@ -36,7 +36,7 @@ def generate_c(data):
         print('#define COMMANDS_H\n', file=h)
         print('#include "interpreter.h"\n', file=h)
         print('#define COMMANDS_MAX', len(commands), file=h)
-        print('extern struct command command_table[COMMANDS_MAX];', file=h)
+        print('extern const struct command command_table[COMMANDS_MAX];', file=h)
         print('\n#endif /* COMMANDS_H */', file=h)   
 
 def main():
