@@ -14,9 +14,9 @@ enum argument_type {
 typedef bool (*command_function)(u32 *);
 
 struct command {
-	command_function func;
-	u8 argc;
-	enum argument_type argument_lengths[INTERPRETER_MAX_PARAMS];
+	const command_function func;
+	const u8 argc;
+	const enum argument_type argument_lengths[INTERPRETER_MAX_PARAMS];
 };
 
 enum interpreter_state {
