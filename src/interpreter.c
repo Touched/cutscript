@@ -63,7 +63,7 @@ void interpreter_parse(void) {
 		return;
 	}
 
-	interpreter_state->active_cmd = &command_table[index];
+	interpreter_state->active_cmd = (struct command *) &command_table[index];
 	argc = interpreter_state->active_cmd->argc;
 	
 	for (i = 0; i < argc; i++) {
