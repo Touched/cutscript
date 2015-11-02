@@ -47,7 +47,7 @@ name: command name
 -name: var_set
 	arguements: [2]
 	description: >
-		(u16 var_ID, &u32 local_var.index) -> [local_var.index] --> true
+		(u16 var_ID, u16 value) -> void --> true
 		
 		sets variable to the value of local_var.index.
 		Note, only last two bytes are transfered.
@@ -65,13 +65,13 @@ name: command name
 -name: value_set
 	arguements: [3]
 	description: >
-		(&u32 addr_ptr, u16 size, &u32 destination) -> void --> true
+		(&u32 addr_ptr, u32 size, &u32 destination) -> void --> true
 		
 		loads into a destination buffer of size bytes equal to the 
 		value of the address pointer given. Does not handle overflow.
 		
 	
--name: malloc_to_var
+-name: mem_malloc
 	arguements: [2]
 	description: >
 		(&u32 local_var.index, u16 size) -> [local_var.index] --> true
@@ -79,7 +79,7 @@ name: command name
 		mallocs size space, and puts ptr in local_var.index.
 		
 	
--name: free_from_var
+-name: malloc_free
 	arguements: [1]
 	description: >
 		(&u32 local_var.index) -> [local_var.index] --> true
