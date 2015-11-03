@@ -1,13 +1,13 @@
 # Priority control flow 
 
 - name: callasm
-  arguments: [1]
+  arguments: [4]
   description: >
     (&u32 subroutine) -> void --> true
     call an ASM subroutine, and continue script upon termination. 
 
 - name: goto
-  arguments: [1]
+  arguments: [4]
   description: >
     (&u32 label) -> [scr_cursor] --> true
     
@@ -15,7 +15,7 @@
     
   
 - name: call
-  arguments: [1]
+  arguments: [4]
   description: >
     (&u32 label) -> [saved_addr_stack], [scr_cursor] --> true
     
@@ -24,7 +24,7 @@
     
   
 - name: b_if
-  arguments: [4]
+  arguments: [4, 4, 4, 4]
   description: >
     (&u32 p1, enum condition, &u32 p2, &u32 label) -> [scr_cursor] --> true
     
@@ -33,7 +33,7 @@
 
 # Priority variable access 
 - name: var_load
-  arguments: [2]
+  arguments: [2, 4]
   description: >
     (u16 var_ID, &u32 local_var.index) -> [local_var.index] --> true
     
@@ -42,7 +42,7 @@
     
   
 - name: var_set
-  arguments: [2]
+  arguments: [2, 2]
   description: >
     (u16 var_ID, u16 value) -> void --> true
     
@@ -51,7 +51,7 @@
     
   
 - name: var_access
-  arguments: [2]
+  arguments: [2, 2]
   description: >
     (u16 var_ID, &u32 local_var.index) -> [local_var.index] --> true
     
@@ -60,7 +60,7 @@
     
   
 - name: value_set
-  arguments: [3]
+  arguments: [4, 4, 4]
   description: >
     (&u32 addr_ptr, u32 size, &u32 destination) -> void --> true
     
@@ -69,7 +69,7 @@
     
   
 - name: mem_malloc
-  arguments: [2]
+  arguments: [4, 2]
   description: >
     (&u32 local_var.index, u16 size) -> [local_var.index] --> true
     
@@ -77,7 +77,7 @@
     
   
 - name: malloc_free
-  arguments: [1]
+  arguments: [4]
   description: >
     (&u32 local_var.index) -> [local_var.index] --> true
     
@@ -87,7 +87,7 @@
 # Priority graphic cmds OAMs 
 
 - name: create_oam
-  arguments: [3]
+  arguments: [4, 4, 4]
   description: >
     (&u32 image, &u32 pal, &u32 local_var.index) -> [local_var.index] --> true
     
@@ -95,7 +95,7 @@
     
   
 - name: oam_display
-  arguments: [2]
+  arguments: [4, 1]
   description: >
     (&u32 local_var.index, u8 mode) -> void --> true
     
@@ -104,7 +104,7 @@
     
   
 - name: oam_move
-  arguments: [3]
+  arguments: [4, 1, 1]
   description: >
     (&u32 local_var.index, u8 x, u8 y) -> void --> true
     
@@ -112,7 +112,7 @@
     
   
 - name: oam_del
-  arguments: [1]
+  arguments: [4]
   description: >
     (&u32 local_var.index) -> [local_var.index] --> true
     
@@ -120,7 +120,7 @@
     
   
 - name: oam_translate
-  arguments: [4]
+  arguments: [4, 1, 1, 1]
   description: >
     (&u32 local_var.index, u8 speed, u8 x, u8 y) -> void --> true
     
@@ -129,7 +129,7 @@
     
   
 - name: oam_pal_update
-  arguments: [2]
+  arguments: [4, 4]
   description: >
     (&u32 local_var.index, &u32 pal) -> void --> true
     
@@ -139,7 +139,7 @@
 # Priority graphic cmds Backgrounds 
 
 - name: load_BG
-  arguments: [4]
+  arguments: [4, 4, 4, 1]
   description: >
     (&u32 image, &u32 pal, &u32 tilemap, u8 slot) -> void --> true
     
@@ -147,7 +147,7 @@
     
   
 - name: BG_display
-  arguments: [2]
+  arguments: [1, 1]
   description: >
     (u8 ID, u8 mode) -> void --> true
     
@@ -156,7 +156,7 @@
     
   
 - name: BG_move
-  arguments: [3]
+  arguments: [1, 1, 1]
   description: >
     (u8 ID, u8 x, u8 y) -> void --> true
     
@@ -172,7 +172,7 @@
     
   
 - name: BG_translate
-  arguments: [4]
+  arguments: [1, 1, 2, 2]
   description: >
     (u8 ID, u8 speed, u16 x, u16 y) -> void --> true
     
@@ -181,7 +181,7 @@
     
   
 - name: oam_pal_update
-  arguments: [2]
+  arguments: [4, 4]
   description: >
     (&u32 local_var.index, &u32 pal) -> void --> true
     
@@ -190,7 +190,7 @@
   
 # Priority Utility cmds 
 - name: pal_fade
-  arguments: [2]
+  arguments: [1, 1]
   description: >
     (u8 color, u8 speed) -> void --> true
     
@@ -215,14 +215,14 @@
   
 # low priority graphic cmds OAMs 
 - name: oam_rotate
-  arguments: [2]
+  arguments: [4, 1]
   description: >
     (&u32 local_var.index, u8 direction) -> void --> true
     rotate an oam in a direction
     
   
 - name: oam_flip
-  arguments: [2]
+  arguments: [4, 1]
   description: >
     (&u32 local_var.index, u8 mode) -> void --> true
     
@@ -230,7 +230,7 @@
     
   
 - name: oam_zoom
-  arguments: [3]
+  arguments: [4, 1, 1]
   description: >
     (&u32 local_var.index, u8 scale_size, u8 scale_mode) -> void --> true
     
@@ -248,7 +248,7 @@
     
     
 - name: while
-  arguments: [3]
+  arguments: [4, 1, 4]
   description: >  
     (&u32 p1, enum condition, &u32 p2) -> void --> true
     
@@ -263,7 +263,7 @@
     
   
 - name: pause
-  arguments: [1]
+  arguments: [4]
   description: >
     (u32 length) -> void --> true
     
@@ -281,4 +281,4 @@
     end
     
     Terminates the script
-	
+
