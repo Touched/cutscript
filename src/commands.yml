@@ -1,5 +1,10 @@
 # Priority control flow 
 
+- name: status
+  description: >
+    (void) -> void --> true
+    true if local_var.status = 0. I.e previous command executed without fail.
+
 - name: callasm
   arguments: [4]
   description: >
