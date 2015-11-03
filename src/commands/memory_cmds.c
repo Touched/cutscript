@@ -1,6 +1,6 @@
-#include "./engine/memory_cmds.h"
+#include "engine/memory.h"
 #include "interpreter.h"
-
+#include "general_command_resources.h"
 
 /* local_var.status = 0 if fail, and 1 if success. True is returned for the
 engine to continue onto the next command */
