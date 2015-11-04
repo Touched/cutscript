@@ -143,7 +143,7 @@
   
 # Priority graphic cmds Backgrounds 
 
-- name: load_BG
+- name: BG_load
   arguments: [4, 4, 4, 1]
   description: >
     (&u32 image, &u32 pal, &u32 tilemap, u8 slot) -> void --> true
@@ -185,7 +185,7 @@
     location X, Y by incrementing or decrementing
     
   
-- name: oam_pal_update
+- name: BG_pal_update
   arguments: [4, 4]
   description: >
     (&u32 local_var.index, &u32 pal) -> void --> true
