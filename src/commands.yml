@@ -1,15 +1,22 @@
 # Priority control flow 
 
-- name: status
+- name: nop
   description: >
-    (void) -> void --> true
-    true if local_var.status = 0. I.e previous command executed without fail.
+    nop
 
-- name: callasm
-  arguments: [4]
+    Nothing
+
+- name: end
   description: >
-    (&u32 subroutine) -> void --> true
-    call an ASM subroutine, and continue script upon termination. 
+    end
+    
+    Terminates the script
+
+#- name: callasm
+#  arguments: [4]
+#  description: >
+#    (&u32 subroutine) -> void --> true
+#    call an ASM subroutine, and continue script upon termination. 
 
 - name: goto
   arguments: [4]
@@ -19,25 +26,25 @@
     scr_cursor = label
     
   
-- name: call
-  arguments: [4]
-  description: >
-    (&u32 label) -> [saved_addr_stack], [scr_cursor] --> true
-    
-    saved_addr_stack.push(scr_cursor)
-    scr_cursor = label
+#- name: call
+#  arguments: [4]
+#  description: >
+#    (&u32 label) -> [saved_addr_stack], [scr_cursor] --> true
+#    
+#    saved_addr_stack.push(scr_cursor)
+#    scr_cursor = label
     
   
-- name: b_if
-  arguments: [4, 4, 4, 4]
-  description: >
-    (&u32 p1, enum condition, &u32 p2, &u32 label) -> [scr_cursor] --> true
-    
-    if p1 condition p2 is true, scr_cursor = label
+#- name: b_if
+#  arguments: [4, 4, 4, 4]
+#  description: >
+#    (&u32 p1, enum condition, &u32 p2, &u32 label) -> [scr_cursor] --> true
+#    
+#    if p1 condition p2 is true, scr_cursor = label
     
 
 # Priority variable access 
-- name: var_load
+- name: ow_var_load
   arguments: [2, 4]
   description: >
     (u16 var_ID, &u32 local_var.index) -> [local_var.index] --> true
@@ -46,7 +53,7 @@
     of a variable
     
   
-- name: var_set
+- name: ow_var_set
   arguments: [2, 2]
   description: >
     (u16 var_ID, u16 value) -> void --> true
@@ -55,7 +62,7 @@
     Note, only last two bytes are transfered.
     
   
-- name: var_access
+- name: ow_var_access
   arguments: [2, 2]
   description: >
     (u16 var_ID, &u32 local_var.index) -> [local_var.index] --> true
@@ -64,29 +71,29 @@
     variable.
     
   
-- name: value_set
-  arguments: [4, 4, 4]
-  description: >
-    (&u32 addr_ptr, u32 size, &u32 destination) -> void --> true
-    
-    loads into a destination buffer of size bytes equal to the 
-    value of the address pointer given. Does not handle overflow.
-    
-  
-- name: mem_malloc
-  arguments: [4, 2]
-  description: >
-    (&u32 local_var.index, u16 size) -> [local_var.index] --> true
-    
-    mallocs size space, and puts ptr in local_var.index.
+#- name: value_set
+#  arguments: [4, 4, 4]
+#  description: >
+#    (&u32 addr_ptr, u32 size, &u32 destination) -> void --> true
+#    
+#    loads into a destination buffer of size bytes equal to the 
+#    value of the address pointer given. Does not handle overflow.
     
   
-- name: malloc_free
-  arguments: [4]
-  description: >
-    (&u32 local_var.index) -> [local_var.index] --> true
+#- name: mem_malloc
+#  arguments: [4, 2]
+#  description: >
+#    (&u32 local_var.index, u16 size) -> [local_var.index] --> true
+#    
+#    mallocs size space, and puts ptr in local_var.index.
     
-    free malloc memory given ptr in local_var.index.
+  
+#- name: malloc_free
+#  arguments: [4]
+#  description: >
+#    (&u32 local_var.index) -> [local_var.index] --> true
+#    
+#    free malloc memory given ptr in local_var.index.
     
   
 # Priority graphic cmds OAMs 
@@ -194,28 +201,28 @@
     
   
 # Priority Utility cmds 
-- name: pal_fade
-  arguments: [1, 1]
-  description: >
-    (u8 color, u8 speed) -> void --> true
-    
-    fade screen to a color at speed fast
-    
-  
-- name: wait
-  description: >
-    (void) -> void --> true
-    
-    wait for an effect
+#- name: pal_fade
+#  arguments: [1, 1]
+#  description: >
+#    (u8 color, u8 speed) -> void --> true
+#    
+#    fade screen to a color at speed fast
     
   
-- name: exit
-  arguments: [1]
-  description: >
-    (u8mode) -> void --> true
+#- name: wait
+#  description: >
+#    (void) -> void --> true
+#    
+#    wait for an effect
     
-    terminates the script and runs a callback to return to the OW,
-    external continue script execution, return to routine call
+  
+#- name: exit
+#  arguments: [1]
+#  description: >
+#    (u8mode) -> void --> true
+#    
+#    terminates the script and runs a callback to return to the OW,
+#    external continue script execution, return to routine call
     
   
 # low priority graphic cmds OAMs 
@@ -245,45 +252,32 @@
   
 # low priority control flow 
 
-- name: do
-  description: >
-    (void) -> saved_addr.d1 --> true
-     
-    saved_addr.d1 = scr_cursor;
+#- name: do
+#  description: >
+#    (void) -> saved_addr.d1 --> true
+#     
+#    saved_addr.d1 = scr_cursor;
     
     
-- name: while
-  arguments: [4, 1, 4]
-  description: >  
-    (&u32 p1, enum condition, &u32 p2) -> void --> true
-    
-    verify (p1 condition p2) is true, if true redirect to saved_addr_stack.pop .
-    p1 and p2 are pointers to data, condition is 0x0-0x5
-    0x00 = p1 != p2
-    0x01 = p1 == p2
-    0x02 = p1 > p2
-    0x03 = p1 <= p2
-    0x04 = p1 >=  p2
-    0x05 = p1 != p2
+#- name: while
+#  arguments: [4, 1, 4]
+#  description: >  
+#    (&u32 p1, enum condition, &u32 p2) -> void --> true
+#    
+#    verify (p1 condition p2) is true, if true redirect to #saved_addr_stack.pop .
+#    p1 and p2 are pointers to data, condition is 0x0-0x5
+#    0x00 = p1 != p2
+#    0x01 = p1 == p2
+#    0x02 = p1 > p2
+#    0x03 = p1 <= p2
+#    0x04 = p1 >=  p2
+#    0x05 = p1 != p2
     
   
-- name: pause
-  arguments: [4]
-  description: >
-    (u32 length) -> void --> true
+#- name: pause
+#  arguments: [4]
+#  description: >
+#    (u32 length) -> void --> true
+#    
+#    wait value frames
     
-    wait value frames
-    
-
-- name: nop
-  description: >
-    nop
-
-    Nothing
-
-- name: end
-  description: >
-    end
-    
-    Terminates the script
-

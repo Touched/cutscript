@@ -2,45 +2,45 @@
 #include "../interpreter.h"
 #include "../engine/types.h"
 
-/* local_var.status = 0 if fail, and 1 if success. True is returned for the
-engine to continue onto the next command */
+extern void interpreter_set_error(void);
 
-
-bool ow_var_load(u32 arg_1, u32 arg_2){
+bool command_ow_var_load(u32 arg_1, u32 arg_2){
 	u16 var = (u16) arg_1; 
 	u32 *var_index = (u32 *) arg_2;
 	if (var < 0x3FFF) {
-		local_var.status = 0;
-	} else {
-		local_var.status = 1;
-		*var_index = (u32) load_var_value(var); 
+		interpreter_set_error();
+		return true;
 	}
+	*var_index = (u32) load_var_value(var); 
 	return true;
 }
 	
 
-bool ow_var_set(u32 arg_1, u32 arg_2){
+bool command_ow_var_set(u32 arg_1, u32 arg_2){
 	u16 var = (u16) arg_1;
 	u8 value = arg_2;
-	local_var.status = var_set_value(var, value);
-	return true;
-}
-
-
-bool ow_var_access(u32 arg_1, u32 arg_2){
-	u16 var = (u16) arg_1;
-	u32 *var_index = (u32 *)arg_2;
-	*var_index = (u32) var_get_pointer(var);
-	if (*var_index == 0){
-		local_var.status = 0;
-	} else {
-		local_var.status = 1;
+	u8 status = var_set_value(var, value);
+	if (status < 1){
+		interpreter_set_error();
 	}
 	return true;
 }
 
 
-bool value_set(u32 arg_1, u32 arg_2, u32 arg_3){
+bool command_ow_var_access(u32 arg_1, u32 arg_2){
+	u16 var = (u16) arg_1;
+	u32 *var_index = (u32 *)arg_2;
+	*var_index = (u32) var_get_pointer(var);
+	if (*var_index == 0){
+		interpreter_set_error();
+	}
+	return true;
+}
+
+/* Low level commands */
+
+/*
+bool command_value_set(u32 arg_1, u32 arg_2, u32 arg_3){
 	u32 *source = (u32 *)arg_1;
 	u32 size = arg_2;
 	u32 *destination = (u32 *)arg_3;
@@ -48,28 +48,27 @@ bool value_set(u32 arg_1, u32 arg_2, u32 arg_3){
 		local_var.status = 1;
 		mem_copy(*destination, *source, size); 
 	} else {
-		local_var.status = 0;
+		interpreter_set_error();
 	}
 	return true;
 }
 
 
-bool mem_malloc(u32 arg_1, u32 arg_2){
+bool command_mem_malloc(u32 arg_1, u32 arg_2){
 	u32 size = arg_2;
 	u32 *destination = (u32 *)arg_1;
 	destination = malloc(size);
-	if (*destination != 0){
-		local_var.status = 1;
-	} else {
-		local_var.status = 0;
+	if (*destination < 1){
+		interpreter_set_error();
 	}
 	return true;
 }
 
 
-bool malloc_free(u32 arg_1){
+bool command_malloc_free(u32 arg_1){
 	u32 *source = (u32 *)arg_1;
 	free(source);
-	local_var.status = 1; // should check src in dyn mem area. TODO.
+	// should check src in dyn mem area. TODO.
 	return true;
 }
+*/

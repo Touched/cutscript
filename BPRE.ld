@@ -6,7 +6,6 @@
  * Functions
  */
 
- // Cutscene slate clean related
 script_env_2_enable = 0x08069940|1;
 help_system_disable_sp198 = 0x0812B478|1;
 pal_set_something = 0x08070588|1;
@@ -20,7 +19,6 @@ reset_and_init_alot = 0x080F4E24|1;
 help_system_enable_unless_flashback__sp199 = 0x0812B484|1;
 bgid_nullify_tilemap = 0x08001FD4|1;
 
-// memory manipulation cmds related
 load_var_value = 0x0806E568|1;
 var_set_value = 0x0806E584|1;
 var_get_pointer = 0x0806E454|1;
