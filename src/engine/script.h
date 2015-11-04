@@ -23,5 +23,8 @@ struct script_env {
 extern struct script_env script_env_1;
 extern struct script_env script_env_2;
 
+void script_env_2_enable(void);
+void sp198_help_system_disable(void);
+
 #endif /* ENGINE_SCRIPT_H */
 	
