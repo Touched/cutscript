@@ -2,6 +2,9 @@
  * Data
  */
 
+script_env_1 = 0x03000EB0;
+script_env_2 = 0x03000F28;
+
 /*
  * Functions
  */
