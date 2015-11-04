@@ -30,6 +30,13 @@ mem_copy = 0x081E5E78|1;
 malloc = 0x08002B9C|1;
 malloc_and_clear = 0x08002BB0|1;
 free = 0x08002BC4|1;
+script_env_2_enable = 0x08069940|1;
+task_add = 0x0807741C|1;
+task_del = 0x08077508|1;
+set_callback2 = 0x08000544|1;
+set_callback1 = 0x080565E0|1;
+fade_screen = 0x08070588|1;
+sp198_help_system_disable = 0x0812B478|1;
 
 /*
  * Custom Data
