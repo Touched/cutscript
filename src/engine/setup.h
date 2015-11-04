@@ -5,7 +5,7 @@ void help_system_disable_sp198(void);
 void pal_set_something(u8, u8, u8, u8, u8);
 void overworld_free_bgmaps(void);
 void lcd_io_set(u8, u8);
-void vblank_hander_set(void (*callback)(u8));
+void vblank_hander_set(u32);
 void vblank_hander_callback(void);
 void gpu_tile_bg_drop_all_sets(u8);
 void bg_positions_reset(void);
