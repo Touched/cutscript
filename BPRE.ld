@@ -5,6 +5,7 @@
 script_env_1 = 0x03000EB0;
 script_env_2 = 0x03000F28;
 pal_fade_control = 0x02037AB8;
+map_post_load_hook = 0x03005020;
 
 /*
  * Functions
@@ -38,6 +39,8 @@ set_callback2 = 0x08000544|1;
 set_callback1 = 0x080565E0|1;
 fade_screen = 0x08070588|1;
 sp198_help_system_disable = 0x0812B478|1;
+overworld_free_bgmaps = 0x080563F0|1;
+mapldr_continue_scripts_restart_music = 0x0807DD24|1;
 
 /*
  * Custom Data
