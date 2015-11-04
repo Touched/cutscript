@@ -5,7 +5,7 @@
 #include "engine/video.h"
 #include "engine/overworld.h"
 
-void task_load_cutscript(u8 task_id) {
+void task_cutscript_loader_overworld_script(u8 task_id) {
 	if (pal_fade_control.mix_color & 0x80) {
 		return;
 	}
@@ -16,7 +16,7 @@ void task_load_cutscript(u8 task_id) {
 	task_del(task_id);
 }
 
-void ow_script_cutscript_special(void) {
+void cutscript_loader_overworld_script(void) {
 	struct script_env *env = NULL;
 
 	/* Select active script environment */
@@ -35,7 +35,7 @@ void ow_script_cutscript_special(void) {
 
 		/* Copy egg hatching special */
 		script_env_2_enable();
-		task_add(task_load_cutscript, 0xA);
+		task_add(task_cutscript_loader_overworld_script, 0xA);
 		fade_screen(0xFFFFFFFF, 0, 0, 0x10, 0);
 		sp198_help_system_disable();
 	}
