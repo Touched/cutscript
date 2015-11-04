@@ -1,10 +1,19 @@
 #include "interpreter.h"
+#include "bootstrap.h"
 #include "engine/script.h"
 #include "engine/callback.h"
 #include "engine/video.h"
+#include "engine/overworld.h"
 
 void task_load_cutscript(u8 task_id) {
+	if (pal_fade_control.mix_color & 0x80) {
+		return;
+	}
 
+	overworld_free_bgmaps();
+	set_callback2(callback_bootstrap);
+	map_post_load_hook = mapldr_continue_scripts_restart_music;
+	task_del(task_id);
 }
 
 void ow_script_cutscript_special(void) {
