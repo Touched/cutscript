@@ -4,6 +4,7 @@
 
 script_env_1 = 0x03000EB0;
 script_env_2 = 0x03000F28;
+pal_fade_control = 0x02037AB8;
 
 /*
  * Functions
