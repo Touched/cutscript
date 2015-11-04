@@ -1,26 +1,32 @@
 #include "../interpreter.h"
 #include "../engine/types.h"
 
-bool load_BG(arg_1, arg_2, arg_3, arg_4){
+bool command_BG_load(arg_1, arg_2, arg_3, arg_4){
 	/* load a BG */
+	return true;
 }
 
-bool BG_display(arg_1){
+bool command_BG_display(arg_1){
 	/* display a BG */
+	return true;
 }
 
-bool BG_move(arg_1, arg_2, arg_3){
+bool command_BG_move(arg_1, arg_2, arg_3){
 	/* set a BG's coords by ID */
+	return true;
 }
 
-bool BG_del(arg_1){
+bool command_BG_del(arg_1){
 	/* delete a BG by ID*/
+	return true;
 }
 
-bool BG_translate(arg_1, arg_2, arg_3, arg_4){
+bool command_BG_translate(arg_1, arg_2, arg_3, arg_4){
 	/* translate a BG by ID to location at speed */
+	return true;
 }
 
-bool BG_pal_update(arg_1, arg_2){
+bool command_BG_pal_update(arg_1, arg_2){
 	/* update a BG's pal */
+	return true;
 }
