@@ -18,6 +18,7 @@ bg_positions_reset = 0x0812D594|1;
 reset_and_init_alot = 0x080F4E24|1;
 help_system_enable_unless_flashback__sp199 = 0x0812B484|1;
 bgid_nullify_tilemap = 0x08001FD4|1;
+mapldr_continue_scripts_restart_music = 0x0807DD24|1;
 
 load_var_value = 0x0806E568|1;
 var_set_value = 0x0806E584|1;
