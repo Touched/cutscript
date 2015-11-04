@@ -35,4 +35,7 @@ struct interpreter {
 
 extern struct interpreter *interpreter_state;
 
+void interpreter_init(u8 *script);
+void interpreter_iteration(void);
+
 #endif /* INTERPRETER_H */
