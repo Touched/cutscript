@@ -107,20 +107,29 @@ with open(args.output, 'rb+') as rom:
                 table[entry] += where
 
         # Read hooks from a file
-        with open('hooks', 'r') as hooklist:
+        with open('pointers', 'r') as hooklist:
                 for line in hooklist:
                         if line.strip().startswith('#'): continue
+                        if not line.strip(): continue
                         
-                        symbol, address, register = line.split()
+                        symbol, address = line.split()
                         offset = int(address, 16) - 0x08000000
                         try:
-                                code = table[symbol]
+                                code = table[symbol] + 0x08000001
                         except KeyError:
                                 print('Symbol missing:', symbol)
                                 continue
 
-                        hook(rom, code, offset, int(register))
-                                
+                        pointer = code.to_bytes(4, 'little')
+
+                        rom.seek(offset)
+                        rom.write(pointer)
+                        print('Wrote pointer to 0x{code:08X} ({bytes}) at 0x{offset:08X}'.format(
+                                code=table[symbol] + 0x08000000,
+                                bytes=' '.join('{:02X}'.format(b) for b in pointer),
+                                offset=offset + 0x08000000
+                        ))
+
         if args.debug:
                 width = max(map(len, table.keys())) + 1
                 for key in sorted(table.keys()):
