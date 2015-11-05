@@ -43,10 +43,10 @@
 
 @ (&u32 image, &u32 pal, &u32 local_var.index) -> [local_var.index] --> true
 @ creates an OAM given pointers to pal and image. Put's it's ID in local var index
-.macro cs_create_oam arg2, arg1, arg0
+.macro cs_create_oam arg1, arg2, arg0
 .byte 6
-.word \arg2
 .word \arg1
+.word \arg2
 .word \arg0
 .endm
 
@@ -60,10 +60,10 @@
 
 @ (&u32 local_var.index, u8 x, u8 y) -> void --> true
 @ Change X, Y position of an OAM with id in local_var.index.
-.macro cs_oam_move arg2, arg1, arg0
+.macro cs_oam_move arg1, arg2, arg0
 .byte 8
-.byte \arg2
 .byte \arg1
+.byte \arg2
 .word \arg0
 .endm
 
@@ -76,12 +76,12 @@
 
 @ (&u32 local_var.index, u8 speed, u8 x, u8 y) -> void --> true
 @ progressively translate an OAM with ID local_var.index at a speed to location X, Y by incrementing or decrementing
-.macro cs_oam_translate arg2, arg3, arg1, arg0
+.macro cs_oam_translate arg1, arg2, arg0, arg3
 .byte 10
-.byte \arg2
-.byte \arg3
 .byte \arg1
+.byte \arg2
 .word \arg0
+.byte \arg3
 .endm
 
 @ (&u32 local_var.index, &u32 pal) -> void --> true
@@ -94,12 +94,12 @@
 
 @ (&u32 image, &u32 pal, &u32 tilemap, u8 slot) -> void --> true
 @ creates a BG in slot using resources provided
-.macro cs_BG_load arg2, arg3, arg1, arg0
+.macro cs_BG_load arg1, arg2, arg0, arg3
 .byte 12
-.word \arg2
-.byte \arg3
 .word \arg1
+.word \arg2
 .word \arg0
+.byte \arg3
 .endm
 
 @ (u8 ID, u8 mode) -> void --> true
@@ -112,10 +112,10 @@
 
 @ (u8 ID, u8 x, u8 y) -> void --> true
 @ Change X, Y position of an BG.
-.macro cs_BG_move arg2, arg1, arg0
+.macro cs_BG_move arg1, arg2, arg0
 .byte 14
-.byte \arg2
 .byte \arg1
+.byte \arg2
 .byte \arg0
 .endm
 
@@ -128,12 +128,12 @@
 
 @ (u8 ID, u8 speed, u16 x, u16 y) -> void --> true
 @ progressively translate an BG at a speed to location X, Y by incrementing or decrementing
-.macro cs_BG_translate arg2, arg3, arg1, arg0
+.macro cs_BG_translate arg1, arg2, arg0, arg3
 .byte 16
-.hword \arg2
-.hword \arg3
 .byte \arg1
+.hword \arg2
 .byte \arg0
+.hword \arg3
 .endm
 
 @ (&u32 local_var.index, &u32 pal) -> void --> true
@@ -161,10 +161,10 @@
 
 @ (&u32 local_var.index, u8 scale_size, u8 scale_mode) -> void --> true
 @ change the scaling on an OAM
-.macro cs_oam_zoom arg2, arg1, arg0
+.macro cs_oam_zoom arg1, arg2, arg0
 .byte 20
-.byte \arg2
 .byte \arg1
+.byte \arg2
 .word \arg0
 .endm
 

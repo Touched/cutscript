@@ -7,5 +7,5 @@ void callback_bootstrap(void) {
 	vblank_hander_set(vblank_hander_callback);
 	gpu_tile_bg_drop_all_sets(0);
 	bg_positions_reset();
-	reset_and_init_alot();
+	callback_clear_and_init();
 }
