@@ -17,7 +17,7 @@ struct fade_ctrl {
 struct fade_ctrl pal_fade_control;
 
 bool fade_screen(u32 bitmask, s8 speed, u8 to, u8 from, u16 color);
-void lcd_io_set(u8, u8);
+void lcd_io_set(u8, u16);
 void vblank_hander_set(void (*)(void));
 void vblank_hander_callback(void);
 void gpu_tile_bg_drop_all_sets(u8);
