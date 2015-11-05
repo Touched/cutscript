@@ -41,7 +41,7 @@ def generate_c(data):
 
 def main():
     with open('src/commands.yml') as commands:
-        data = yaml.load(commands, Loader=yaml.CLoader)
+        data = yaml.load(commands, Loader=yaml.Loader)
 
     generate_c(data)
 
