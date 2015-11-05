@@ -17,6 +17,7 @@ struct task {
 
 u8 task_add(task_callback func, u8 priority);
 void task_del(u8 id);
+void task_exec(void);
 
 void set_callback2(super_callback func);
 void set_callback1(super_callback func);

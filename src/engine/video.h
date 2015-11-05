@@ -24,5 +24,9 @@ void gpu_tile_bg_drop_all_sets(u8);
 void bg_positions_reset(void);
 void callback_clear_and_init(void);
 void bgid_nullify_tilemap(u8);
+void textbox_something(void);
+void objc_exec(void);
+void obj_sync_something(void);
+void fade_and_return_progress_probably(void);
 
 #endif /* ENGINE_VIDEO_H */
