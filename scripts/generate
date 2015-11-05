@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import yaml
+import textwrap
 
 def generate_c(data):
     lengths = {
@@ -37,12 +38,41 @@ def generate_c(data):
         print('#include "interpreter.h"\n', file=h)
         print('#define COMMANDS_MAX', len(commands), file=h)
         print('extern const struct command command_table[COMMANDS_MAX];', file=h)
-        print('\n#endif /* COMMANDS_H */', file=h)   
+        print('\n#endif /* COMMANDS_H */', file=h)
+
+def generate_asm_macros(data):
+    lengths = {
+        1: '.byte',
+        2: '.hword',
+        4: '.word'
+    }
+
+    def get_arg(arg):
+        return 'arg{}'.format(arg[0])
+
+    with open('cutscript/cutscript.s', 'w') as s:
+        for cmd, command in enumerate(data):
+            name = command['name']
+            args = command['arguments'] if 'arguments' in command else []
+            description = command['description']
+            doc_prefix = '@ '
+            docstring = description.strip().split('\n')
+
+            # Create arg_name => length mapping
+            argmap = dict(zip(map(get_arg, enumerate(args)), args))
+            
+            print('\n'.join(doc_prefix + line for line in docstring), file=s)
+            print('.macro cs_{} {}'.format(name, ', '.join(argmap.keys())), file=s)
+            print('.byte', cmd, file=s)
+            for name, length in argmap.items():
+                print('{} \{}'.format(lengths[length], name), file=s)
+            print('.endm\n', file=s)
 
 def main():
     with open('src/commands.yml') as commands:
         data = yaml.load(commands, Loader=yaml.Loader)
 
     generate_c(data)
+    generate_asm_macros(data)
 
 main()
