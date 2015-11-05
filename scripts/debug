@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+mgba -g test.gba &
+EMULATOR=$!
+arm-none-eabi-gdb -q -x scripts/gdb
+kill -9 $EMULATOR
