@@ -8,3 +8,9 @@ build : $(wildcard src/*.h) $(wildcard src/*.c) $(wildcard src/*.s)
 
 generate : $(wildcard src/*.yml)
 	scripts/generate
+
+run : all
+	mgba test.gba
+
+debug : all
+	scripts/debug
