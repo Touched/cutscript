@@ -16,6 +16,6 @@ struct fade_ctrl {
 
 struct fade_ctrl pal_fade_control;
 
-bool fade_screen(u32 bitmask, s8 unknown, u8 to, u8 from, u16 color);
+bool fade_screen(u32 bitmask, s8 speed, u8 to, u8 from, u16 color);
 
 #endif /* ENGINE_VIDEO_H */
