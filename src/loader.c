@@ -6,7 +6,7 @@
 #include "engine/overworld.h"
 
 void task_cutscript_loader_overworld_script(u8 task_id) {
-	if (pal_fade_control.mix_color & 0x80) {
+	if (pal_fade_control.mix_color >> 8 & 0x80) {
 		return;
 	}
 
