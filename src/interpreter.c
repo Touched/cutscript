@@ -54,6 +54,11 @@ u32 interpreter_parse_arg(enum argument_type arg_length) {
 }
 
 void interpreter_parse(void) {
+	if (!interpreter_state->program_counter) {
+		interpreter_set_error();
+		return;
+	}
+	
 	u8 index = *interpreter_state->program_counter++;
 	u8 argc, i;
 	enum argument_type arg_length;
