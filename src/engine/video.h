@@ -28,5 +28,9 @@ void textbox_something(void);
 void objc_exec(void);
 void obj_sync_something(void);
 void fade_and_return_progress_probably(void);
+u16 gpu_copy_to_tileset(u8 layer, u8 *tiles, u16 size, u16 offset);
+void gpu_copy_tilemap(u8 layer, u8 *map, u16 size_or_null, u16 offset);
+void gpu_pal_apply(u8 *palette, u16 offset, u16 size);
+void bgid_send_tilemap(u8 layer);
 
 #endif /* ENGINE_VIDEO_H */

@@ -35,6 +35,11 @@ set_callback2 = 0x08000544|1;
 set_callback1 = 0x080565E0|1;
 fade_screen = 0x08070588|1;
 sp198_help_system_disable = 0x0812B478|1;
+malloc_and_LZ77UnComp = 0x080F6AA0|1;
+gpu_copy_to_tileset = 0x080017D0|1;
+gpu_copy_tilemap = 0x08002040|1;
+bgid_send_tilemap = 0x080020BC|1;
+gpu_pal_apply = 0x080703EC|1;
 
 task_exec = 0x08077578|1;
 textbox_something = 0x08002DE8|1;
