@@ -88,6 +88,10 @@ void interpreter_iteration(void) {
 	
 	switch (interpreter_state->state) {
 	case STATE_STOPPED:
+		if (interpreter_state->before_end_hook) {
+			interpreter_state->before_end_hook();
+		}
+		
 		interpreter_free();
 		interpreter_state = NULL;
 		break;

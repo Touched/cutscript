@@ -32,6 +32,7 @@ struct interpreter {
 	u32 arguments[INTERPRETER_MAX_PARAMS];
 	struct command *active_cmd;
 	u8 tilemap_space[4][0x1000];
+	void (*before_end_hook)(void);
 };
 
 extern struct interpreter *interpreter_state;
