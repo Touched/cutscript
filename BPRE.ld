@@ -3,7 +3,6 @@
  */
  
 superstate = 0x030030F0;
-
 script_env_1 = 0x03000EB0;
 script_env_2 = 0x03000F28;
 pal_fade_control = 0x02037AB8;
@@ -14,6 +13,8 @@ map_post_load_hook = 0x03005020;
  */
 
 script_env_2_enable = 0x08069940|1;
+help_system_disable_sp198 = 0x0812B478|1;
+pal_set_something = 0x08070588|1;
 overworld_free_bgmaps = 0x080563F0|1;
 lcd_io_set = 0x08000A38|1;
 vblank_hander_set = 0x080006F4|1;
@@ -24,6 +25,10 @@ callback_clear_and_init = 0x080F4E24|1;
 bgid_nullify_tilemap = 0x08001FD4|1;
 mapldr_continue_scripts_restart_music = 0x0807DD24|1;
 c2_exit_to_overworld_2_switch = 0x080567DC|1;
+reset_and_init_alot = 0x080F4E24|1;
+help_system_enable_unless_flashback__sp199 = 0x0812B484|1;
+bgid_nullify_tilemap = 0x08001FD4|1;
+mapldr_continue_scripts_restart_music = 0x0807DD24|1;
 
 load_var_value = 0x0806E568|1;
 var_set_value = 0x0806E584|1;
