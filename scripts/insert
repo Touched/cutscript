@@ -95,6 +95,8 @@ def hook(rom, space, hook_at, register=0):
         space += 0x08000001
         data += (space.to_bytes(4, 'little'))
         rom.write(bytes(data))
+
+
         
 shutil.copyfile(args.input, args.output)
 with open(args.output, 'rb+') as rom:
@@ -102,34 +104,51 @@ with open(args.output, 'rb+') as rom:
         table = symbols(offset)
         where = insert(rom)
 
+        def make_list(stream):
+                for line in stream:
+                        if line.strip().startswith('#'): continue
+                        if not line.strip(): continue
+                        fields = line.split()
+                        symbol = fields[0]
+
+                        try:
+                                address = table[symbol]
+                        except KeyError:
+                                print('Symbol missing:', symbol)
+                                continue
+
+                        if address:
+                                yield (address,) + tuple(fields[1:])
+
         # Adjust symbol table
         for entry in table:
                 table[entry] += where
 
         # Read hooks from a file
-        with open('pointers', 'r') as hooklist:
-                for line in hooklist:
-                        if line.strip().startswith('#'): continue
-                        if not line.strip(): continue
-                        
-                        symbol, address = line.split()
+        with open('pointers', 'r') as pointerlist:
+                for code, address in make_list(pointerlist):
                         offset = int(address, 16) - 0x08000000
-                        try:
-                                code = table[symbol] + 0x08000001
-                        except KeyError:
-                                print('Symbol missing:', symbol)
-                                continue
-
+                        code += 0x08000001
                         pointer = code.to_bytes(4, 'little')
 
                         rom.seek(offset)
                         rom.write(pointer)
                         print('Wrote pointer to 0x{code:08X} ({bytes}) at 0x{offset:08X}'.format(
-                                code=table[symbol] + 0x08000000,
+                                code=code - 1,
                                 bytes=' '.join('{:02X}'.format(b) for b in pointer),
                                 offset=offset + 0x08000000
                         ))
 
+        with open('hooks', 'r') as hooklist:
+                for code, address, register in make_list(hooklist):
+                        offset = int(address, 16) - 0x08000000
+                        hook(rom, code, offset, int(register))
+                        print('Wrote hook to 0x{code:08X} ({bytes}) at 0x{offset:08X}'.format(
+                                code=code,
+                                bytes=' '.join('{:02X}'.format(b) for b in pointer),
+                                offset=offset + 0x08000000
+                        ))
+                        
         if args.debug:
                 width = max(map(len, table.keys())) + 1
                 for key in sorted(table.keys()):
