@@ -1,6 +1,8 @@
 /*
  * Data
  */
+ 
+superstate = 0x030030F0;
 
 script_env_1 = 0x03000EB0;
 script_env_2 = 0x03000F28;
