@@ -20,7 +20,7 @@ void interpreter_set_error(void) {
 void interpreter_run(void) {
 	/* Command returns true when done */
 	if (interpreter_state->active_cmd->func((u32*) &interpreter_state->arguments[0])
-		&& interpreter_state->state == interpreter_run) {
+	    && interpreter_get_state() == STATE_RUNNING) {
 		interpreter_set_state(STATE_PARSE);
 	}
 }
@@ -94,21 +94,28 @@ void interpreter_error(void) {
 	interpreter_stop();
 }
 
+const interpreter_state_func interpreter_states[] = {
+	[STATE_STOPPED] = interpreter_stop,
+	[STATE_PARSE] = interpreter_parse,
+	[STATE_RUNNING] = interpreter_run,
+	[STATE_ERROR] = interpreter_error,	
+};
+
 void interpreter_set_state(enum interpreter_state state) {
-	switch (state) {
-	case STATE_STOPPED:
-		interpreter_state->state = interpreter_stop;
-		break;
-	case STATE_PARSE:
-		interpreter_state->state = interpreter_parse;
-		break;
-	case STATE_RUNNING:
-		interpreter_state->state = interpreter_run;
-		break;
-	case STATE_ERROR:
-		interpreter_state->state = interpreter_error;
-		break;
+	interpreter_state->state = interpreter_states[state];
+}
+
+enum interpreter_state interpreter_get_state(void) {
+	u8 states = sizeof(interpreter_states) / sizeof(interpreter_state_func);
+	u8 i;
+
+	for (i = 0; i < states; i++) {
+		if (interpreter_states[i] == interpreter_state->state) {
+			return i;
+		}
 	}
+
+	return STATE_NONE;
 }
 
 void interpreter_iteration(void) {

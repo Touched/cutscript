@@ -20,6 +20,7 @@ struct command {
 };
 
 enum interpreter_state {
+	STATE_NONE,
 	STATE_STOPPED,
 	STATE_PARSE,
 	STATE_RUNNING,
@@ -42,5 +43,6 @@ extern struct interpreter *interpreter_state;
 void interpreter_init(u8 *script);
 void interpreter_iteration(void);
 void interpreter_set_state(enum interpreter_state state);
-
+enum interpreter_state interpreter_get_state(void);
+	
 #endif /* INTERPRETER_H */
