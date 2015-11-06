@@ -82,9 +82,14 @@ void interpreter_parse(void) {
 }
 
 void interpreter_iteration(void) {
+	if (!interpreter_state) {
+		return;
+	}
+	
 	switch (interpreter_state->state) {
 	case STATE_STOPPED:
 		interpreter_free();
+		interpreter_state = NULL;
 		break;
 	case STATE_PARSE:
 		interpreter_parse();
