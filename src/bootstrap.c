@@ -15,10 +15,10 @@ void callback_cutscript_run(void) {
 }
 
 const struct bg_config config[4] = {
-	{1},
-	{1},
-	{1},
-	{1}	
+	{0, 0, 0, 3, 1, 1, 1, 4},
+	{1, 0, 1, 2, 1, 1, 1, 8},
+	{0, 1, 2, 1, 0, 1, 1, 16},
+	{1, 1, 3, 0, 1, 1, 1, 24}	
 };
 
 void hook_return_to_overworld(void) {
@@ -37,12 +37,12 @@ void callback_bootstrap(void) {
 
 	lcd_io_set(0, 0x1040);
 
+	bg_vram_setup(0, (struct bg_config *) config, 4);
+
 	for (i = 0; i < 4; i++) {
 		bgid_set_tilemap(i, interpreter_state->tilemap_space[i]);
 	}
 	
-	bg_vram_setup(0, (struct bg_config *) config, 4);
-
 	/* Allow cutscript to return to the overworld when done */
 	interpreter_state->before_end_hook = hook_return_to_overworld;
 
