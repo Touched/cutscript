@@ -15,8 +15,17 @@ bool command_bg_load(u32 *args) {
 	return true;
 }
 
-bool command_BG_display(arg_1){
+bool command_BG_display(u32 *args){
 	/* display a BG */
+	u8 layer = (u8) args[0];
+	bool show = (u8) args[1];
+
+	if (show) {
+		gpu_sync_bg_show(layer);
+	} else {
+		gpu_sync_bg_hide(layer);
+	}
+	
 	return true;
 }
 
