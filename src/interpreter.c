@@ -4,23 +4,24 @@
 	
 void interpreter_free(void) {
 	free(interpreter_state);
+	interpreter_state = NULL;
 }
 
 void interpreter_init(u8 *script) {
 	interpreter_state = (struct interpreter *) malloc_and_clear(sizeof(struct interpreter));
 	interpreter_state->program_counter = script;
-	interpreter_state->state = STATE_PARSE;
+	interpreter_set_state(STATE_PARSE);
 }
 
 void interpreter_set_error(void) {
-	interpreter_state->state = STATE_ERROR;
+	interpreter_set_state(STATE_ERROR);
 }
 
 void interpreter_run(void) {
 	/* Command returns true when done */
 	if (interpreter_state->active_cmd->func((u32*) &interpreter_state->arguments[0])
-		&& interpreter_state->state == STATE_RUNNING) {
-		interpreter_state->state = STATE_PARSE;
+		&& interpreter_state->state == interpreter_run) {
+		interpreter_set_state(STATE_PARSE);
 	}
 }
 
@@ -76,32 +77,42 @@ void interpreter_parse(void) {
 		interpreter_state->arguments[i] = interpreter_parse_arg(arg_length);
 	}
 	
-	interpreter_state->state = STATE_RUNNING;
+	interpreter_set_state(STATE_RUNNING);
 	interpreter_run();
 	return;
 }
 
-void interpreter_iteration(void) {
-	if (!interpreter_state) {
-		return;
+void interpreter_stop(void) {
+	if (interpreter_state->before_end_hook) {
+		interpreter_state->before_end_hook();
 	}
-	
-	switch (interpreter_state->state) {
-	case STATE_STOPPED:
-		if (interpreter_state->before_end_hook) {
-			interpreter_state->before_end_hook();
-		}
 		
-		interpreter_free();
-		interpreter_state = NULL;
+	interpreter_free();
+}
+
+void interpreter_error(void) {
+	interpreter_stop();
+}
+
+void interpreter_set_state(enum interpreter_state state) {
+	switch (state) {
+	case STATE_STOPPED:
+		interpreter_state->state = interpreter_stop;
 		break;
 	case STATE_PARSE:
-		interpreter_parse();
+		interpreter_state->state = interpreter_parse;
 		break;
 	case STATE_RUNNING:
-		interpreter_run();
+		interpreter_state->state = interpreter_run;
 		break;
 	case STATE_ERROR:
+		interpreter_state->state = interpreter_error;
 		break;
+	}
+}
+
+void interpreter_iteration(void) {
+	if (interpreter_state && interpreter_state->state) {
+		interpreter_state->state();
 	}
 }

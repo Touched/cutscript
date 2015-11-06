@@ -7,6 +7,6 @@ bool command_goto(u32 *args) {
 }
 
 bool command_end(u32 *args) {
-	interpreter_state->state = STATE_STOPPED;
+	interpreter_set_state(STATE_STOPPED);
 	return true;
 }

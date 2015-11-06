@@ -26,9 +26,11 @@ enum interpreter_state {
 	STATE_ERROR
 };
 
+typedef void (*interpreter_state_func)(void);
+
 struct interpreter {
 	u8 *program_counter;
-	enum interpreter_state state;
+	interpreter_state_func state;
 	u32 arguments[INTERPRETER_MAX_PARAMS];
 	struct command *active_cmd;
 	u8 tilemap_space[4][0x1000];
@@ -39,5 +41,6 @@ extern struct interpreter *interpreter_state;
 
 void interpreter_init(u8 *script);
 void interpreter_iteration(void);
+void interpreter_set_state(enum interpreter_state state);
 
 #endif /* INTERPRETER_H */
