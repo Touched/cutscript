@@ -1,5 +1,6 @@
 #include "engine/memory.h"
 #include "engine/video.h"
+#include "engine/overworld.h"
 #include "engine/callback.h"
 #include "interpreter.h"
 
@@ -20,6 +21,10 @@ const struct bg_config config[4] = {
 	{1}	
 };
 
+void hook_return_to_overworld(void) {
+	set_callback2(c2_exit_to_overworld_2_switch);
+}
+
 void callback_bootstrap(void) {
 	u8 i;
 	
@@ -36,7 +41,10 @@ void callback_bootstrap(void) {
 		bgid_set_tilemap(i, interpreter_state->tilemap_space[i]);
 	}
 	
-	bg_vram_setup(0, (struct bg_config *) config, 4);	
+	bg_vram_setup(0, (struct bg_config *) config, 4);
+
+	/* Allow cutscript to return to the overworld when done */
+	interpreter_state->before_end_hook = hook_return_to_overworld;
 
 	/* Run the interpreter and callbacks  */
 	callback_cutscript_run();

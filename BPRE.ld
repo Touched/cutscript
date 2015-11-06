@@ -21,6 +21,7 @@ bg_positions_reset = 0x0812D594|1;
 callback_clear_and_init = 0x080F4E24|1;
 bgid_nullify_tilemap = 0x08001FD4|1;
 mapldr_continue_scripts_restart_music = 0x0807DD24|1;
+c2_exit_to_overworld_2_switch = 0x080567DC|1;
 
 load_var_value = 0x0806E568|1;
 var_set_value = 0x0806E584|1;
