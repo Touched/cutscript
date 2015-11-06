@@ -150,12 +150,12 @@
   
 # Priority graphic cmds Backgrounds 
 
-- name: BG_load
-  arguments: [4, 4, 4, 1]
+- name: bg_load
+  arguments: [1, 4, 4]
   description: >
-    (&u32 image, &u32 pal, &u32 tilemap, u8 slot) -> void --> true
+    (u8 layer, &u32 tileset, &u32 tilemap) -> void --> true
     
-    creates a BG in slot using resources provided
+    Uploads tileset and tilemap to background layer.
     
   
 - name: BG_display

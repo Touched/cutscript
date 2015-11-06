@@ -47,5 +47,8 @@ void gpu_pal_apply(u8 *palette, u16 offset, u16 size);
 void bgid_send_tilemap(u8 layer);
 void bgid_set_tilemap(u8 layer, u8 *space);
 void bg_vram_setup(u8 layer, struct bg_config *config, u8 layers);
+void *decompress_with_fallback_maybe(u8 layer, u8* tiles, u16 size, u16 offset, u8 mode);
+void gpu_sync_bg_show(u8 layer);
+void gpu_sync_bg_hide(u8 layer);
 
 #endif /* ENGINE_VIDEO_H */

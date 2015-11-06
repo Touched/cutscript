@@ -47,6 +47,9 @@ textbox_something = 0x08002DE8|1;
 objc_exec = 0x08006B5C|1;
 obj_sync_something = 0x08006BA8|1;
 fade_and_return_progress_probably = 0x080704D0|1;
+decompress_with_fallback_maybe = 0x080F6878|1;
+gpu_sync_bg_show = 0x080019BC|1;
+gpu_sync_bg_hide = 0x080019D0|1;
 
 bgid_set_tilemap = 0x08001FA0|1;
 bg_vram_setup = 0x08001658|1;

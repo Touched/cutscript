@@ -1,8 +1,17 @@
 #include "../interpreter.h"
 #include "../engine/types.h"
+#include "../engine/video.h"
+#include "../engine/memory.h"
 
-bool command_BG_load(arg_1, arg_2, arg_3, arg_4){
-	/* load a BG */
+bool command_bg_load(u32 *args) {
+	u8 layer = (u8) args[0];
+	u8 *tileset = (u8*) args[1];
+	u8 *tilemap = (u8*) args[2];
+
+	decompress_with_fallback_maybe(layer, tileset, 0, 0, 0);
+	gpu_copy_tilemap(layer, tilemap, 0, 0);
+	bgid_send_tilemap(layer);
+
 	return true;
 }
 
