@@ -13,7 +13,16 @@ void callback_cutscript_run(void) {
 	interpreter_iteration();
 }
 
+const struct bg_config config[4] = {
+	{1},
+	{1},
+	{1},
+	{1}	
+};
+
 void callback_bootstrap(void) {
+	u8 i;
+	
 	/* Clean up and setup */
 	lcd_io_set(0, 0);
 	vblank_hander_set(vblank_hander_callback);
@@ -22,6 +31,12 @@ void callback_bootstrap(void) {
 	callback_clear_and_init();
 
 	lcd_io_set(0, 0x1040);
+
+	for (i = 0; i < 4; i++) {
+		bgid_set_tilemap(i, interpreter_state->tilemap_space[i]);
+	}
+	
+	bg_vram_setup(0, (struct bg_config *) config, 4);	
 
 	/* Run the interpreter and callbacks  */
 	callback_cutscript_run();

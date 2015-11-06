@@ -31,6 +31,7 @@ struct interpreter {
 	enum interpreter_state state;
 	u32 arguments[INTERPRETER_MAX_PARAMS];
 	struct command *active_cmd;
+	u8 tilemap_space[4][0x1000];
 };
 
 extern struct interpreter *interpreter_state;
