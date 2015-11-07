@@ -76,12 +76,12 @@
 
 @ (&u32 local_var.index, u8 speed, u8 x, u8 y) -> void --> true
 @ progressively translate an OAM with ID local_var.index at a speed to location X, Y by incrementing or decrementing
-.macro cs_oam_translate arg1, arg2, arg3, arg0
+.macro cs_oam_translate arg1, arg2, arg0, arg3
 .byte 10
 .byte \arg1
 .byte \arg2
-.byte \arg3
 .word \arg0
+.byte \arg3
 .endm
 
 @ (&u32 local_var.index, &u32 pal) -> void --> true
@@ -92,14 +92,13 @@
 .word \arg0
 .endm
 
-@ (&u32 image, &u32 pal, &u32 tilemap, u8 slot) -> void --> true
-@ creates a BG in slot using resources provided
-.macro cs_BG_load arg1, arg2, arg3, arg0
+@ (u8 layer, &u32 tileset, &u32 tilemap) -> void --> true
+@ Uploads tileset and tilemap to background layer.
+.macro cs_bg_load arg1, arg2, arg0
 .byte 12
 .word \arg1
 .word \arg2
-.byte \arg3
-.word \arg0
+.byte \arg0
 .endm
 
 @ (u8 ID, u8 mode) -> void --> true
@@ -128,12 +127,12 @@
 
 @ (u8 ID, u8 speed, u16 x, u16 y) -> void --> true
 @ progressively translate an BG at a speed to location X, Y by incrementing or decrementing
-.macro cs_BG_translate arg1, arg2, arg3, arg0
+.macro cs_BG_translate arg1, arg2, arg0, arg3
 .byte 16
 .byte \arg1
 .hword \arg2
-.hword \arg3
 .byte \arg0
+.hword \arg3
 .endm
 
 @ (&u32 local_var.index, &u32 pal) -> void --> true
@@ -165,6 +164,13 @@
 .byte 20
 .byte \arg1
 .byte \arg2
+.word \arg0
+.endm
+
+@ (u32 length) -> void --> true
+@ Wait length frames
+.macro cs_pause arg0
+.byte 21
 .word \arg0
 .endm
 

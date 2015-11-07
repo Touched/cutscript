@@ -273,11 +273,9 @@
 #    0x04 = p1 >=  p2
 #    0x05 = p1 != p2
     
-  
-#- name: pause
-#  arguments: [4]
-#  description: >
-#    (u32 length) -> void --> true
-#    
-#    wait value frames
+- name: pause
+  arguments: [4]
+  description: >
+    (u32 length) -> void --> true
     
+    Wait length frames
