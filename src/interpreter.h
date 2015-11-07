@@ -54,5 +54,6 @@ void variable_set_local(u8 index, u32 value);
 u32 variable_get_global(u8 index);
 void variable_set_global(u8 index, u32 value);
 u32 variable_or_value(u32 index);
+void variable_clear_locals(void);
 
 #endif /* INTERPRETER_H */

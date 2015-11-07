@@ -72,6 +72,8 @@ void interpreter_parse(void) {
 	interpreter_state->active_cmd = (struct command *) &command_table[index];
 	argc = interpreter_state->active_cmd->argc;
 
+	variable_clear_locals();
+
 	for (i = 0; i < INTERPRETER_MAX_PARAMS; i++) {
 		if (i < argc) {
 			arg_length = interpreter_state->active_cmd->argument_lengths[i];

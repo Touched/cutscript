@@ -53,6 +53,7 @@ gpu_sync_bg_hide = 0x080019D0|1;
 
 bgid_set_tilemap = 0x08001FA0|1;
 bg_vram_setup = 0x08001658|1;
+memset = 0x081E5ED8|1;
 
 /*
  * Custom Data

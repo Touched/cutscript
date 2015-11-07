@@ -35,3 +35,10 @@ u32 variable_or_value(u32 index) {
 		return index;
 	}
 }
+
+void variable_clear_locals(void) {
+	u8 i;
+	for (i = 0; i < INTERPRETER_MAX_LOCAL_VARS; i++) {
+		interpreter_state->local_vars[i] = 0;
+	}
+}
