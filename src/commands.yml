@@ -192,22 +192,21 @@
     location X, Y by incrementing or decrementing
     
   
-- name: BG_pal_update
-  arguments: [4, 4]
+- name: pal_load
+  arguments: [4, 2, 2]
   description: >
-    (&u32 local_var.index, &u32 pal) -> void --> true
+    (u16 *pal, u16 offset, u16 size) -> void --> true
     
     update BG pal to pal. Old pal is overwritten.
     
-  
-# Priority Utility cmds 
-#- name: pal_fade
-#  arguments: [1, 1]
-#  description: >
-#    (u8 color, u8 speed) -> void --> true
-#    
-#    fade screen to a color at speed fast
     
+- name: pal_fade
+  arguments: [1, 1, 1, 2]
+  description: >
+    (s8 speed, u8 from, u8 to, u16 color) -> void --> true
+        
+    fade screen to a color at speed fast
+        
   
 #- name: wait
 #  description: >
