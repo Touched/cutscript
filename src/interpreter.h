@@ -53,6 +53,12 @@ enum interpreter_state {
 
 typedef void (*interpreter_state_func)(void);
 
+struct async_state {
+	u32 args[INTERPRETER_MAX_PARAMS];
+	command_function func;
+	struct async_state *next;
+};
+
 struct interpreter {
 	u8 *program_counter;
 	interpreter_state_func state;
@@ -62,6 +68,7 @@ struct interpreter {
 	struct command *active_cmd;
 	u8 tilemap_space[4][0x1000];
 	void (*before_end_hook)(void);
+	struct async_state *async;
 };
 
 extern struct interpreter *interpreter_state;
