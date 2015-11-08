@@ -1,91 +1,14 @@
 # Priority control flow 
 
 - name: nop
-  arguments: [1]
   description: >
-    (&u32 subroutine) -> void --> true
-    call an ASM subroutine, and continue script upon termination. 
-
-- name: goto
-  arguments: [1]
+    nop
+    Nothing
+- name: end
   description: >
-    (&u32 label) -> [scr_cursor] --> true
+    end
     
-    scr_cursor = label
-    
-  
-- name: call
-  arguments: [1]
-  description: >
-    (&u32 label) -> [saved_addr_stack], [scr_cursor] --> true
-    
-    saved_addr_stack.push(scr_cursor)
-    scr_cursor = label
-    
-  
-- name: b_if
-  arguments: [4]
-  description: >
-    (&u32 p1, enum condition, &u32 p2, &u32 label) -> [scr_cursor] --> true
-    
-    if p1 condition p2 is true, scr_cursor = label
-    
-
-# Priority variable access 
-- name: var_load
-  arguments: [2]
-  description: >
-    (u16 var_ID, &u32 local_var.index) -> [local_var.index] --> true
-    
-    sets the value of a local_var.index to be the value
-    of a variable
-    
-  
-- name: var_set
-  arguments: [2]
-  description: >
-    (u16 var_ID, u16 value) -> void --> true
-    
-    sets variable to the value of local_var.index.
-    Note, only last two bytes are transfered.
-    
-  
-- name: var_access
-  arguments: [2]
-  description: >
-    (u16 var_ID, &u32 local_var.index) -> [local_var.index] --> true
-    
-    sets local_var.index to be equal to the pointer to
-    variable.
-    
-  
-- name: value_set
-  arguments: [3]
-  description: >
-    (&u32 addr_ptr, u32 size, &u32 destination) -> void --> true
-    
-    loads into a destination buffer of size bytes equal to the 
-    value of the address pointer given. Does not handle overflow.
-    
-  
-- name: mem_malloc
-  arguments: [2]
-  description: >
-    (&u32 local_var.index, u16 size) -> [local_var.index] --> true
-    
-    mallocs size space, and puts ptr in local_var.index.
-    
-  
-- name: malloc_free
-  arguments: [1]
-  description: >
-    (&u32 local_var.index) -> [local_var.index] --> true
-    
-    free malloc memory given ptr in local_var.index.
-    
-  
-# Priority graphic cmds OAMs 
-
+    Terminates the script
 #- name: callasm
 #  arguments: [4]
 #  description: >
@@ -180,7 +103,7 @@
     creates an OAM given pointers to pal and image. Put's it's ID in local var index
     
   
-- name: oam_display
+- name: oam_display 
   arguments: [4, 1]
   description: >
     (&u32 local_var.index, u8 mode) -> void --> true
@@ -208,50 +131,10 @@
 - name: oam_translate
   arguments: [4, 1, 1, 1]
   description: >
-    (
-  
-- name: create_oam
-  arguments: [3]
-  description: >
-    (&u32 image, &u32 pal, &u32 local_var.index) -> [local_var.index] --> true
-    
-    creates an OAM given pointers to pal and image. Put's it's ID in local var index
-    
-  
-- name: oam_display
-  arguments: [2]
-  description: >
-    (&u32 local_var.index, u8 mode) -> void --> true
-    
-    Controls the display of a OAM with an ID stored in local_var.index. 
-    Mode 0 = hide, Mode 1 = show
-    
-  
-- name: oam_move
-  arguments: [3]
-  description: >
-    (&u32 local_var.index, u8 x, u8 y) -> void --> true
-    
-    Change X, Y position of an OAM with id in local_var.index.
-    
-  
-- name: oam_del
-  arguments: [1]
-  description: >
-    (&u32 local_var.index) -> [local_var.index] --> true
-    
-    delete and free associated resources of an OAM with ID local_var.index
-    
-  
-- name: oam_translate
-  arguments: [4]
-  description: >
->>>>>>> commands.yml updates
-    (&u32 local_var.index, u8 speed, u8 x, u8 y) -> void --> true
+    (&u32 local_var.index, u8 x, u8 y, u8 speed) -> void --> true
     
     progressively translate an OAM with ID local_var.index at a speed to
     location X, Y by incrementing or decrementing
-<<<<<<< HEAD
     
   
 - name: oam_pal_update
@@ -362,7 +245,6 @@
     
     change the scaling on an OAM
     
-
   
 # low priority control flow 
 
@@ -394,162 +276,3 @@
 #    (u32 length) -> void --> true
 #    
 #    wait value frames
-    
-=======
-    
-  
-- name: oam_pal_update
-  arguments: [2]
-  description: >
-    (&u32 local_var.index, &u32 pal) -> void --> true
-    
-    update OAM pal to pal. Old pal is overwritten.
-    
-  
-# Priority graphic cmds Backgrounds 
-
-- name: load_BG
-  arguments: [4]
-  description: >
-    (&u32 image, &u32 pal, &u32 tilemap, u8 slot) -> void --> true
-    
-    creates a BG in slot using resources provided
-    
-  
-- name: BG_display
-  arguments: [2]
-  description: >
-    (u8 ID, u8 mode) -> void --> true
-    
-    Controls the display of a OAM with an ID stored in local_var.index. 
-    Mode 0 = hide, Mode 1 = show
-    
-  
-- name: BG_move
-  arguments: [3]
-  description: >
-    (u8 ID, u8 x, u8 y) -> void --> true
-    
-    Change X, Y position of an BG.
-    
-  
-- name: BG_del
-  arguments: [1]
-  description: >
-    (u8 ID) -> void --> true
-    
-    delete and free associated resources of a BG
-    
-  
-- name: BG_translate
-  arguments: [4]
-  description: >
-    (u8 ID, u8 speed, u16 x, u16 y) -> void --> true
-    
-    progressively translate an BG at a speed to
-    location X, Y by incrementing or decrementing
-    
-  
-- name: oam_pal_update
-  arguments: [2]
-  description: >
-    (&u32 local_var.index, &u32 pal) -> void --> true
-    
-    update BG pal to pal. Old pal is overwritten.
-    
-  
-# Priority Utility cmds 
-- name: pal_fade
-  arguments: [2]
-  description: >
-    (u8 color, u8 speed) -> void --> true
-    
-    fade screen to a color at speed fast
-    
-  
-- name: wait
-  description: >
-    (void) -> void --> true
-    
-    wait for an effect
-    
-  
-- name: exit
-  arguments: [1]
-  description: >
-    (u8mode) -> void --> true
-    
-    terminates the script and runs a callback to return to the OW,
-    external continue script execution, return to routine call
-    
-  
-# low priority graphic cmds OAMs 
-- name: oam_rotate
-  arguments: [2]
-  description: >
-    (&u32 local_var.index, u8 direction) -> void --> true
-    rotate an oam in a direction
-    
-  
-- name: oam_flip
-  arguments: [2]
-  description: >
-    (&u32 local_var.index, u8 mode) -> void --> true
-    
-    flip an oam on an axis
-    
-  
-- name: oam_zoom
-  arguments: [3]
-  description: >
-    (&u32 local_var.index, u8 scale_size, u8 scale_mode) -> void --> true
-    
-    change the scaling on an OAM
-    
-
-  
-# low priority control flow 
-
-- name: do
-  description: >
-    (void) -> saved_addr.d1 --> true
-     
-    saved_addr.d1 = scr_cursor;
-    
-    
-- name: while
-  arguments: [3]
-  description: >  
-    (&u32 p1, enum condition, &u32 p2) -> void --> true
-    
-    verify (p1 condition p2) is true, if true redirect to saved_addr_stack.pop .
-    p1 and p2 are pointers to data, condition is 0x0-0x5
-    0x00 = p1 != p2
-    0x01 = p1 == p2
-    0x02 = p1 > p2
-    0x03 = p1 <= p2
-    0x04 = p1 >=  p2
-    0x05 = p1 != p2
-    
-  
-- name: pause
-  arguments: [1]
-  description: >
-    (u32 length) -> void --> true
-    
-    wait value frames
-    
-
-- name: nop
-  description: >
-    nop
-
-    Nothing
-
-- name: end
-  description: >
-    end
-    
-    Terminates the script
-	
->>>>>>> commands.yml updates

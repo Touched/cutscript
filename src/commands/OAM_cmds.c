@@ -7,7 +7,7 @@ void build_default_objtemplate(void){
 	objtemplate.tiles_tag ++;
 	objtemplate.pal_tag ++;
 
-	// OAM struct build
+	// OAM struct build 
 	objtemplate.OAM.y = 0x0;
 	objtemplate.OAM.flags1 = 0x1;
 	objtemplate.OAM.x = 0x0;
