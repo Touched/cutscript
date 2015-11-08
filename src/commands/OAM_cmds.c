@@ -47,7 +47,7 @@ void oam_move(u8 id, u16 x, u16 y){
 	return;
 }
 
-/*
+
 
 // Task system based OAM transition
 
@@ -57,26 +57,26 @@ bool oam_move_task(u8 task_id){
 		objects[tasks[task_id].priv[0]].pos_1_x + speed;
 	} else {
 		task_del(task_id);
-		return true;
+		return;
 	}
 	if ((objects[tasks[task_id].priv[0]].pos_1_y + speed) > tasks[task_id].priv[2]){
 		objects[tasks[task_id].priv[0]].pos_1_y + speed;
 	} else {
 		task_del(task_id);
-		return true;
+		return;
 	}
-	return false;
+	return;
 }
 
-void command_oam_translate(u32 *args){
+bool command_oam_translate_synced(u32 *args){
 
 	u8 task_id = task_add(oam_move);
 	tasks[task_id].priv[0] = (u16) args[0]; // ID
 	tasks[task_id].priv[1] = (u16) args[1]; // X 
 	tasks[task_id].priv[2] = (u16) args[2]; // Y
 	tasks[task_id].priv[3] = (u16) args[3]; // Speed
-	return;
-} */
+	return true;
+} 
 
 /* non task version, relying on interpreter state for frame by frame */
 bool command_oam_translate(u32 *args){
