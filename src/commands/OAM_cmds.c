@@ -85,13 +85,12 @@ bool command_oam_translate(u32 *args){
 	} else {
 		return true;
 	}
-	if ((objects[arg[0]].pos_1_x + arg[3]) > arg[2]){
-		objects[arg[2]].pos_1_x + arg[3];
+	if ((objects[arg[0]].pos_1_y + arg[3]) > arg[2]){
+		objects[arg[2]].pos_1_y + arg[3];
 	} else {
 		return true;
 	}
-	objects[arg[0]].pos_1_x 
-
+	return false;
 }
 
 bool command_oam_move(u32 *args){
