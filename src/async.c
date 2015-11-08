@@ -13,9 +13,7 @@ void async_spawn(command_function func, u32 *args) {
 }
 
 bool async_exec_single(struct async_state *node) {
-	u32 *args = (u32*) &interpreter_state->arguments[0];
-	
-	switch (node->func(args)) {
+	switch (node->func(node->args)) {
 	case COMMAND_BLOCK:	/* FIXME: Block makes no sense for async command */
 	case COMMAND_ASYNC:
 		return false;
