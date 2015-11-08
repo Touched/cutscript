@@ -136,8 +136,7 @@ enum interpreter_state interpreter_get_state(void) {
 
 void interpreter_iteration(void) {
 	if (interpreter_state && interpreter_state->state) {
+		async_exec();
 		interpreter_state->state();
 	}
-
-	async_exec();
 }
