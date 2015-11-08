@@ -12,8 +12,44 @@ void async_spawn(command_function func, u32 *args) {
 	interpreter_state->async = node;
 }
 
-void async_exec(void) {
+bool async_exec_single(struct async_state *node) {
+	u32 *args = (u32*) &interpreter_state->arguments[0];
+	
+	switch (node->func(args)) {
+	case COMMAND_BLOCK:	/* FIXME: Block makes no sense for async command */
+	case COMMAND_ASYNC:
+		return false;
+	case COMMAND_FINISHED:
+		break;
+	case COMMAND_ERROR:
+		interpreter_set_state(STATE_ERROR);
+		break;
+	}
 
+	return true;
+}
+
+void async_exec(void) {
+	struct async_state *node = interpreter_state->async,
+		*prev = NULL,
+		*temp = NULL;
+
+	while (node != NULL) {
+		if (async_exec_single(node)) {
+			/* Delete node */
+			if (prev == NULL) {
+				interpreter_state->async = node->next;
+			} else {
+				prev->next = node->next;
+			}
+
+			temp = node;
+			node = node->next;
+			free(temp);
+		} else {
+			node = node->next;
+		}
+	}
 }
 	
 
