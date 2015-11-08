@@ -13,7 +13,29 @@ enum argument_type {
 	ARG_WORD
 };
 
-typedef bool (*command_function)(u32 *);
+enum command_return_value {
+	COMMAND_BLOCK,		/* 
+				 * Run the command function next frame,
+				 * but don't process the next command
+				 */
+
+	COMMAND_FINISHED,	/* 
+				 * Mark the command as complete, and
+				 * do not run it next frame
+				 */
+
+	COMMAND_ASYNC,		/* 
+				 * Run the command function next frame,
+				 * but process the next command
+				 */
+
+	COMMAND_ERROR,		/* 
+				 * Mark the function as exiting due to
+				 * an error.
+				 */	
+};
+
+typedef enum command_return_value (*command_function)(u32 *);
 
 struct command {
 	const command_function func;

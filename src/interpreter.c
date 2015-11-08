@@ -1,6 +1,7 @@
 #include "engine/memory.h"
 #include "interpreter.h"
 #include "commands.h"
+#include "async.h"
 	
 void interpreter_free(void) {
 	free(interpreter_state);
@@ -18,10 +19,19 @@ void interpreter_set_error(void) {
 }
 
 void interpreter_run(void) {
-	/* Command returns true when done */
-	if (interpreter_state->active_cmd->func((u32*) &interpreter_state->arguments[0])
-	    && interpreter_get_state() == STATE_RUNNING) {
+	u32 *args = (u32*) &interpreter_state->arguments[0];
+	
+	switch (interpreter_state->active_cmd->func(args)) {
+	case COMMAND_BLOCK:
+		break;
+	case COMMAND_ASYNC:
+		async_spawn(interpreter_state->active_cmd->func, args);
+	case COMMAND_FINISHED:
 		interpreter_set_state(STATE_PARSE);
+		break;
+	case COMMAND_ERROR:
+		interpreter_set_state(STATE_ERROR);
+		break;
 	}
 }
 
