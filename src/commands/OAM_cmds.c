@@ -81,12 +81,12 @@ void command_oam_translate(u32 *args){
 /* non task version, relying on interpreter state for frame by frame */
 bool command_oam_translate(u32 *args){
 	if ((objects[arg[0]].pos_1_x + arg[3]) > arg[1]){
-		objects[arg[1]].pos_1_x + arg[3];
+		objects[arg[0]].pos_1_x + arg[3];
 	} else {
 		return true;
 	}
 	if ((objects[arg[0]].pos_1_y + arg[3]) > arg[2]){
-		objects[arg[2]].pos_1_y + arg[3];
+		objects[arg[0]].pos_1_y + arg[3];
 	} else {
 		return true;
 	}
