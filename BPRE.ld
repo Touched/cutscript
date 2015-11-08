@@ -7,6 +7,8 @@ script_env_1 = 0x03000EB0;
 script_env_2 = 0x03000F28;
 pal_fade_control = 0x02037AB8;
 map_post_load_hook = 0x03005020;
+objtemplate = 0x0203AD40;
+objects = 0x0202063C;
 
 /*
  * Functions
