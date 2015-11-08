@@ -22,4 +22,6 @@ void task_exec(void);
 void set_callback2(super_callback func);
 void set_callback1(super_callback func);
 
+extern struct task tasks[16];
+
 #endif /* ENGINE_CALLBACK_H */
