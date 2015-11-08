@@ -138,4 +138,6 @@ void interpreter_iteration(void) {
 	if (interpreter_state && interpreter_state->state) {
 		interpreter_state->state();
 	}
+
+	async_exec();
 }
