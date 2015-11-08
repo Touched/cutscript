@@ -1,12 +1,12 @@
 #include "../engine/types.h"
 #include "../interpreter.h"
 
-bool command_goto(u32 *args) {
+enum command_return_value command_goto(u32 *args) {
 	interpreter_state->program_counter = (u8 *) args[0];
-	return true;
+	return COMMAND_FINISHED;
 }
 
-bool command_end(u32 *args) {
+enum command_return_value command_end(u32 *args) {
 	interpreter_set_state(STATE_STOPPED);
-	return true;
+	return COMMAND_FINISHED;
 }

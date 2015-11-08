@@ -1,5 +1,6 @@
 #include "../engine/types.h"
+#include "../interpreter.h"
 
-bool command_nop(u32 *args) {
-	return true;
+enum command_return_value command_nop(u32 *args) {
+	return COMMAND_FINISHED;
 }

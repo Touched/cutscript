@@ -1,6 +1,11 @@
 #include "../engine/types.h"
+#include "../interpreter.h"
 
-bool command_pause(u32 *args) {
-	return !(args[0]--);
+enum command_return_value command_pause(u32 *args) {
+	if (args[0]--) {
+		return COMMAND_FINISHED;
+	} else {
+		return COMMAND_BLOCK;
+	}
 }
 
