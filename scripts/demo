@@ -1,2 +1,42 @@
 #!/usr/bin/env python
 
+import shutil
+import subprocess
+import os
+
+PATH = os.path.join(os.environ['DEVKITARM'], 'bin')
+PREFIX = 'arm-none-eabi-'
+AS = os.path.join(PATH, PREFIX + 'as')
+OBJCOPY = os.path.join(PATH, PREFIX + 'objcopy')
+ASFLAGS = ['-mthumb', '-I', 'cutscript']
+
+def run_command(cmd):
+    try:
+        return subprocess.check_output(cmd).decode()
+    except subprocess.CalledProcessError as e:
+        print(e.output.decode(), file=sys.stderr)
+        sys.exit(1)
+
+def assemble(in_file):
+    '''Assemble'''
+    cmd = [AS] + ASFLAGS + ['-c', in_file, '-o', 'build/a.o']
+    run_command(cmd)
+    cmd = [OBJCOPY, '-O', 'binary', 'build/a.o', 'build/a.bin']
+    run_command(cmd)
+    with open('build/a.bin', 'rb') as binary:
+        data = binary.read()
+
+    return data
+
+def main():
+    shutil.copyfile("test.gba", "demo.gba")
+
+    with open('demo.gba', 'rb+') as rom:
+        # Demo 1
+        code = assemble('examples/cutscene/script.s')
+        rom.seek(0x900000)
+        rom.write(code)
+    
+    
+if __name__ == '__main__':
+    main()
