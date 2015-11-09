@@ -14,3 +14,9 @@ run : all
 
 debug : all
 	scripts/debug
+
+build-demo : all
+	scripts/demo
+
+demo : build-demo
+	mgba demo.gba
