@@ -99,22 +99,22 @@ bool command_oam_move(u32 *args){
 	return true;
 }
 
-bool command_oam_pal_update(arg_1, arg_2){
+bool command_oam_pal_update(u32 *args){
 	/* change pal of an OAM */
 	return true;
 }
 
-bool command_oam_rotate(arg_1, arg_2){
+bool command_oam_rotate(u32 *args){
 	/* rotate OAM a direction */
 	return true;
 }
 
-bool command_oam_flip(arg_1, arg_2){
+bool command_oam_flip(u32 *args){
 	/* flip an oam a certain axis */
 	return true;
 }
 
-bool command_oam_zoom(arg_1, arg_2, arg_3){
+bool command_oam_zoom(u32 *args){
 	/* Zoom into part of an OAM */
 	return true;
 }

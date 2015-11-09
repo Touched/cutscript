@@ -21,6 +21,6 @@ bool command_waitbutton_specific(u32 *args) {
 }
 
 bool command_read_button(u32 *args) {
-	interpreter.localvar = (u32) superstate.buttons_new_remapped;
+	interpreter.localvar[args[0]] = (u32) superstate.buttons_new_remapped;
 	return true;
 }
