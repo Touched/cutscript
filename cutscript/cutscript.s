@@ -76,12 +76,12 @@
 
 @ (&u32 local_var.index, u8 speed, u8 x, u8 y) -> void --> true
 @ progressively translate an OAM with ID local_var.index at a speed to location X, Y by incrementing or decrementing
-.macro cs_oam_translate arg0, arg1, arg3, arg2
+.macro cs_oam_translate arg0, arg1, arg2, arg3
 .byte 10
 .word \arg0
 .byte \arg1
-.byte \arg3
 .byte \arg2
+.byte \arg3
 .endm
 
 @ (&u32 local_var.index, &u32 pal) -> void --> true
@@ -127,12 +127,12 @@
 
 @ (u8 ID, u8 speed, u16 x, u16 y) -> void --> true
 @ progressively translate an BG at a speed to location X, Y by incrementing or decrementing
-.macro cs_BG_translate arg0, arg1, arg3, arg2
+.macro cs_BG_translate arg0, arg1, arg2, arg3
 .byte 16
 .byte \arg0
 .byte \arg1
-.hword \arg3
 .hword \arg2
+.hword \arg3
 .endm
 
 @ (u16 *pal, u16 offset, u16 size) -> void --> true
@@ -147,12 +147,12 @@
 @ (s8 speed, u8 from, u8 to, u16 color) -> void --> true
 @     
 @ fade screen to a color at speed fast
-.macro cs_pal_fade arg0, arg1, arg3, arg2
+.macro cs_pal_fade arg0, arg1, arg2, arg3
 .byte 18
 .byte \arg0
 .byte \arg1
-.hword \arg3
 .byte \arg2
+.hword \arg3
 .endm
 
 @ (&u32 local_var.index, u8 direction) -> void --> true rotate an oam in a direction

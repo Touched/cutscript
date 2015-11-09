@@ -2,6 +2,7 @@
 
 import yaml
 import textwrap
+from collections import OrderedDict
 
 def generate_c(data):
     lengths = {
@@ -59,7 +60,7 @@ def generate_asm_macros(data):
             docstring = description.strip().split('\n')
 
             # Create arg_name => length mapping
-            argmap = dict(zip(map(get_arg, enumerate(args)), args))
+            argmap = OrderedDict(zip(map(get_arg, enumerate(args)), args))
             
             print('\n'.join(doc_prefix + line for line in docstring), file=s)
             print('.macro cs_{} {}'.format(name, ', '.join(argmap.keys())), file=s)
