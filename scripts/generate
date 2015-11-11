@@ -69,10 +69,21 @@ def generate_asm_macros(data):
                 print('{} \{}'.format(lengths[length], name), file=s)
             print('.endm\n', file=s)
 
+def noramlize(data):
+    for command in data:
+        if not 'arguments' in command: command['arguments'] = []
+
+        if 'category' not in command:
+            print('Command', command['name'], 'missing category')
+            quit(1)
+
+    return data
+            
 def main():
     with open('src/commands.yml') as commands:
         data = yaml.load(commands, Loader=yaml.Loader)
 
+    data = noramlize(data)
     generate_c(data)
     generate_asm_macros(data)
 

@@ -1,12 +1,14 @@
 # Priority control flow 
 
 - name: nop
+  category: 'control_flow'
   description: >
     nop
 
     Nothing
 
 - name: end
+  category: 'control_flow'  
   description: >
     end
     
@@ -19,6 +21,7 @@
 #    call an ASM subroutine, and continue script upon termination. 
 
 - name: goto
+  category: 'control_flow'  
   arguments: [4]
   description: >
     (&u32 label) -> [scr_cursor] --> true
@@ -45,6 +48,7 @@
 
 # Priority variable access 
 - name: ow_var_load
+  category: 'memory'  
   arguments: [2, 4]
   description: >
     (u16 var_ID, &u32 local_var.index) -> [local_var.index] --> true
@@ -54,6 +58,7 @@
     
   
 - name: ow_var_set
+  category: 'memory'  
   arguments: [2, 2]
   description: >
     (u16 var_ID, u16 value) -> void --> true
@@ -63,6 +68,7 @@
     
   
 - name: ow_var_access
+  category: 'memory'
   arguments: [2, 2]
   description: >
     (u16 var_ID, &u32 local_var.index) -> [local_var.index] --> true
@@ -99,6 +105,7 @@
 # Priority graphic cmds OAMs 
 
 - name: create_oam
+  category: 'sprite'
   arguments: [4, 4, 4]
   description: >
     (&u32 image, &u32 pal, &u32 local_var.index) -> [local_var.index] --> true
@@ -107,6 +114,7 @@
     
   
 - name: oam_display
+  category: 'sprite'
   arguments: [4, 1]
   description: >
     (&u32 local_var.index, u8 mode) -> void --> true
@@ -116,6 +124,7 @@
     
   
 - name: oam_move
+  category: 'sprite'
   arguments: [4, 1, 1]
   description: >
     (&u32 local_var.index, u8 x, u8 y) -> void --> true
@@ -124,6 +133,7 @@
     
   
 - name: oam_del
+  category: 'sprite'
   arguments: [4]
   description: >
     (&u32 local_var.index) -> [local_var.index] --> true
@@ -132,6 +142,7 @@
     
   
 - name: oam_translate
+  category: 'sprite'
   arguments: [4, 1, 1, 1]
   description: >
     (&u32 local_var.index, u8 speed, u8 x, u8 y) -> void --> true
@@ -141,6 +152,7 @@
     
   
 - name: oam_pal_update
+  category: 'sprite'
   arguments: [4, 4]
   description: >
     (&u32 local_var.index, &u32 pal) -> void --> true
@@ -151,6 +163,7 @@
 # Priority graphic cmds Backgrounds 
 
 - name: bg_load
+  category: 'background'  
   arguments: [1, 4, 4]
   description: >
     (u8 layer, &u32 tileset, &u32 tilemap) -> void --> true
@@ -159,6 +172,7 @@
     
   
 - name: BG_display
+  category: 'background'  
   arguments: [1, 1]
   description: >
     (u8 ID, u8 mode) -> void --> true
@@ -168,6 +182,7 @@
     
   
 - name: BG_move
+  category: 'background'  
   arguments: [1, 1, 1]
   description: >
     (u8 ID, u8 x, u8 y) -> void --> true
@@ -176,6 +191,7 @@
     
   
 - name: BG_del
+  category: 'background'  
   arguments: [1]
   description: >
     (u8 ID) -> void --> true
@@ -184,6 +200,7 @@
     
   
 - name: BG_translate
+  category: 'background'  
   arguments: [1, 1, 2, 2]
   description: >
     (u8 ID, u8 speed, u16 x, u16 y) -> void --> true
@@ -193,6 +210,7 @@
     
   
 - name: pal_load
+  category: 'palette'  
   arguments: [4, 2, 2]
   description: >
     (u16 *pal, u16 offset, u16 size) -> void --> true
@@ -201,6 +219,7 @@
     
     
 - name: pal_fade
+  category: 'palette'  
   arguments: [1, 1, 1, 2]
   description: >
     (s8 speed, u8 from, u8 to, u16 color) -> void --> true
@@ -226,6 +245,7 @@
   
 # low priority graphic cmds OAMs 
 - name: oam_rotate
+  category: 'sprite'    
   arguments: [4, 1]
   description: >
     (&u32 local_var.index, u8 direction) -> void --> true
@@ -233,6 +253,7 @@
     
   
 - name: oam_flip
+  category: 'sprite'
   arguments: [4, 1]
   description: >
     (&u32 local_var.index, u8 mode) -> void --> true
@@ -241,6 +262,7 @@
     
   
 - name: oam_zoom
+  category: 'sprite'
   arguments: [4, 1, 1]
   description: >
     (&u32 local_var.index, u8 scale_size, u8 scale_mode) -> void --> true
@@ -273,6 +295,7 @@
 #    0x05 = p1 != p2
     
 - name: pause
+  category: 'control_flow'
   arguments: [4]
   description: >
     (u32 length) -> void --> true
