@@ -22,7 +22,11 @@
 
 - name: goto
   category: 'control_flow'  
-  arguments: [4]
+  arguments:
+    - name: address
+      description: "Address to jump to"
+      type: address
+  
   description: >
     (&u32 label) -> [scr_cursor] --> true
     
@@ -49,7 +53,13 @@
 # Priority variable access 
 - name: ow_var_load
   category: 'memory'  
-  arguments: [2, 4]
+  arguments:
+    - name: ow_var_id
+      description: "OWScript variable"
+      type: hword
+    - name: var_id
+      description: "Local variable"
+      type: hword
   description: >
     (u16 var_ID, &u32 local_var.index) -> [local_var.index] --> true
     
@@ -58,8 +68,14 @@
     
   
 - name: ow_var_set
-  category: 'memory'  
-  arguments: [2, 2]
+  category: 'memory'
+  arguments:
+    - name: ow_var_id
+      description: "OWScript variable"
+      type: hword
+    - name: value
+      description: "Value"
+      type: hword
   description: >
     (u16 var_ID, u16 value) -> void --> true
     
@@ -69,7 +85,13 @@
   
 - name: ow_var_access
   category: 'memory'
-  arguments: [2, 2]
+  arguments:
+    - name: ow_var_id
+      description: "OWScript variable"
+      type: hword
+    - name: variable
+      description: "Local variable"
+      type: hword    
   description: >
     (u16 var_ID, &u32 local_var.index) -> [local_var.index] --> true
     
@@ -106,7 +128,16 @@
 
 - name: create_oam
   category: 'sprite'
-  arguments: [4, 4, 4]
+  arguments:
+    - name: image
+      description: "Image data"
+      type: word
+    - name: pal
+      description: "Palette"
+      type: word
+    - name: var
+      description: "Variable"
+      type: word
   description: >
     (&u32 image, &u32 pal, &u32 local_var.index) -> [local_var.index] --> true
     
@@ -115,7 +146,14 @@
   
 - name: oam_display
   category: 'sprite'
-  arguments: [4, 1]
+  arguments:
+    - name: var
+      description: "Variable"
+      type: word
+    - name: mode
+      description: "OAM mode"
+      type: byte
+  
   description: >
     (&u32 local_var.index, u8 mode) -> void --> true
     
@@ -125,7 +163,16 @@
   
 - name: oam_move
   category: 'sprite'
-  arguments: [4, 1, 1]
+  arguments:
+    - name: var
+      description: "Variable"
+      type: word
+    - name: x
+      description: "X"
+      type: byte
+    - name: y
+      description: "Y"
+      type: byte
   description: >
     (&u32 local_var.index, u8 x, u8 y) -> void --> true
     
@@ -134,7 +181,10 @@
   
 - name: oam_del
   category: 'sprite'
-  arguments: [4]
+  arguments:
+    - name: var
+      description: "Variable"
+      type: word
   description: >
     (&u32 local_var.index) -> [local_var.index] --> true
     
@@ -143,7 +193,19 @@
   
 - name: oam_translate
   category: 'sprite'
-  arguments: [4, 1, 1, 1]
+  arguments:
+    - name: var
+      description: "Variable"
+      type: word
+    - name: speed
+      description: "Speed"
+      type: byte
+    - name: x
+      description: "X"
+      type: byte
+    - name: y
+      description: "Y"
+      type: byte
   description: >
     (&u32 local_var.index, u8 speed, u8 x, u8 y) -> void --> true
     
@@ -153,7 +215,13 @@
   
 - name: oam_pal_update
   category: 'sprite'
-  arguments: [4, 4]
+  arguments:
+    - name: var
+      description: "Variable"
+      type: word
+    - name: pal
+      description: "Palette"
+      type: word
   description: >
     (&u32 local_var.index, &u32 pal) -> void --> true
     
@@ -164,7 +232,16 @@
 
 - name: bg_load
   category: 'background'  
-  arguments: [1, 4, 4]
+  arguments:
+    - name: layer
+      description: 'Background layer'
+      type: byte
+    - name: tileset
+      description: 'Tileset'
+      type: word
+    - name: tilemap
+      description: 'Tilemap'
+      type: word
   description: >
     (u8 layer, &u32 tileset, &u32 tilemap) -> void --> true
     
@@ -173,7 +250,14 @@
   
 - name: BG_display
   category: 'background'  
-  arguments: [1, 1]
+  arguments:
+    - name: layer
+      description: 'Background layer'
+      type: byte
+    - name: mode
+      description: 'Mode'
+      type: byte
+        
   description: >
     (u8 ID, u8 mode) -> void --> true
     
@@ -183,7 +267,16 @@
   
 - name: BG_move
   category: 'background'  
-  arguments: [1, 1, 1]
+  arguments:
+    - name: layer
+      description: 'Background layer'
+      type: byte
+    - name: x
+      description: "X"
+      type: byte
+    - name: y
+      description: "Y"
+      type: byte
   description: >
     (u8 ID, u8 x, u8 y) -> void --> true
     
@@ -192,7 +285,10 @@
   
 - name: BG_del
   category: 'background'  
-  arguments: [1]
+  arguments:
+    - name: layer
+      description: "Background layer"
+      type: byte
   description: >
     (u8 ID) -> void --> true
     
@@ -201,7 +297,19 @@
   
 - name: BG_translate
   category: 'background'  
-  arguments: [1, 1, 2, 2]
+  arguments:
+    - name: layer
+      description: "Background layer"
+      type: byte
+    - name: speed
+      description: "Speed"
+      type: byte
+    - name: x
+      description: "X"
+      type: hword
+    - name: y
+      description: "Y"
+      type: hword
   description: >
     (u8 ID, u8 speed, u16 x, u16 y) -> void --> true
     
@@ -211,7 +319,16 @@
   
 - name: pal_load
   category: 'palette'  
-  arguments: [4, 2, 2]
+  arguments:
+    - name: pal
+      description: "Palette"
+      type: word
+    - name: offset
+      description: "Palette offset"
+      type: hword
+    - name: size
+      description: "Palette size"
+      type: hword
   description: >
     (u16 *pal, u16 offset, u16 size) -> void --> true
     
@@ -220,7 +337,19 @@
     
 - name: pal_fade
   category: 'palette'  
-  arguments: [1, 1, 1, 2]
+  arguments:
+    - name: speed
+      description: "Speed"
+      type: byte
+    - name: from
+      description: "Fade start"
+      type: byte
+    - name: to
+      description: "Fade end"
+      type: byte
+    - name: color
+      description: "Fade color"
+      type: hword
   description: >
     (s8 speed, u8 from, u8 to, u16 color) -> void --> true
         
@@ -246,7 +375,13 @@
 # low priority graphic cmds OAMs 
 - name: oam_rotate
   category: 'sprite'    
-  arguments: [4, 1]
+  arguments:
+    - name: var
+      description: "Variable"
+      type: word
+    - name: direction
+      description: "Direction"
+      type: byte
   description: >
     (&u32 local_var.index, u8 direction) -> void --> true
     rotate an oam in a direction
@@ -254,7 +389,13 @@
   
 - name: oam_flip
   category: 'sprite'
-  arguments: [4, 1]
+  arguments:
+    - name: var
+      description: "Variable"
+      type: word
+    - name: mode
+      description: "mode"
+      type: byte
   description: >
     (&u32 local_var.index, u8 mode) -> void --> true
     
@@ -263,7 +404,16 @@
   
 - name: oam_zoom
   category: 'sprite'
-  arguments: [4, 1, 1]
+  arguments:
+    - name: var
+      description: "Variable"
+      type: word
+    - name: size
+      description: "size"
+      type: byte
+    - name: mode
+      description: "mode"
+      type: byte
   description: >
     (&u32 local_var.index, u8 scale_size, u8 scale_mode) -> void --> true
     
@@ -296,7 +446,10 @@
     
 - name: pause
   category: 'control_flow'
-  arguments: [4]
+  arguments:
+    - name: length
+      description: "Pause length"
+      type: word
   description: >
     (u32 length) -> void --> true
     
