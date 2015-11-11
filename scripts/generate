@@ -4,7 +4,7 @@ import yaml
 import textwrap
 from collections import OrderedDict
 
-arg_lengths = {
+argument_lengths = {
     'word': 4,
     'hword': 2,
     'byte': 1,
@@ -27,7 +27,7 @@ def generate_c(data):
             args = command['arguments'] if 'arguments' in command else []
 
             length = len(args)
-            arg_lengths = ', '.join(lengths[arg] for arg in args)
+            arg_lengths = ', '.join(str(argument_lengths[arg['type']]) for arg in args)
             commands.append('\t{{ command_{}, {}, {{ {} }} }}'.format(name, length, arg_lengths))
             functions.append('bool command_{}(u32 *);'.format(name))
 
@@ -66,14 +66,12 @@ def generate_asm_macros(data):
             doc_prefix = '@ '
             docstring = description.strip().split('\n')
 
-            # Create arg_name => length mapping
-            argmap = OrderedDict(zip(map(get_arg, enumerate(args)), args))
-            
             print('\n'.join(doc_prefix + line for line in docstring), file=s)
-            print('.macro cs_{} {}'.format(name, ', '.join(argmap.keys())), file=s)
+            print('.macro cs_{} {}'.format(name, ', '.join(a['name'] for a in args)), file=s)
             print('.byte', cmd, file=s)
-            for name, length in argmap.items():
-                print('{} \{}'.format(lengths[length], name), file=s)
+            for arg in args:
+                length = argument_lengths[arg['type']]
+                print('{} \{}'.format(lengths[length], arg['name']), file=s)
             print('.endm\n', file=s)
 
 def noramlize(data):
@@ -97,7 +95,7 @@ def noramlize(data):
                 print('Command', command['name'], 'missing argument type')
                 quit(1)
 
-            if argument['type'] not in arg_lengths:
+            if argument['type'] not in argument_lengths:
                 print('Command', command['name'], 'has invalid arg type:', argument['type'])
                 quit(1)
 
