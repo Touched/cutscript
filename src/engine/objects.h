@@ -64,7 +64,7 @@ struct object {
 	struct frame **animation_table;
 	u8 *gfx_table;
 	struct rotscale_frame **rotscale_table;
-	struct template *template;
+	struct objtemplate *template;
 	u32 field18;
 	object_callback callback;
 	u16 x;
