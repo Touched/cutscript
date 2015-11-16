@@ -60,12 +60,6 @@ struct async_state {
 	struct async_state *next;
 };
 
-struct obj_id_list {
-	u8 tail;
-	u8 size;
-	u8 obj_used[40];
-};
-
 struct interpreter {
 	u8 *program_counter;
 	interpreter_state_func state;
