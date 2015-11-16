@@ -10,7 +10,6 @@ void interpreter_free(void) {
 
 void interpreter_init(u8 *script) {
 	interpreter_state = (struct interpreter *) malloc_and_clear(sizeof(struct interpreter));
-	interpreter_state->obj_ids->size = 0;
 	interpreter_state->program_counter = script;
 	interpreter_set_state(STATE_PARSE);
 }

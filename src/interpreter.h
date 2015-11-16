@@ -76,7 +76,7 @@ struct interpreter {
 	u8 tilemap_space[4][0x1000];
 	void (*before_end_hook)(void);
 	struct async_state *async;
-	struct obj_id_list *obj_ids;
+	u16 pal_tag;
 };
 
 

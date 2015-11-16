@@ -4,8 +4,8 @@
 #include "../engine/memory.h"
 
 void build_template (struct objtemplate objtemp, u32 *image) {
-	objtemp.tiles_tag = interpreter_state->obj_ids->size;
-	objtemp.pal_tag = interpreter_state->obj_ids->size;
+	objtemp.tiles_tag = 0xFFFF;
+	objtemp.pal_tag = interpreter_state->pal_tag++;
 	objtemp.oam = poke_oam_battle;
 	objtemp.animation = anim_poke;
 	objtemp.graphics->graphics = (u8 *)(image);
