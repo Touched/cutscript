@@ -27,7 +27,8 @@ void interpreter_run(void) {
 	case COMMAND_ASYNC:
 		async_spawn(interpreter_state->active_cmd->func, args);
 	case COMMAND_FINISHED:
-		interpreter_set_state(STATE_PARSE);
+		interpreter_set_state(STATE_PARSE);		
+		interpreter_state->state();
 		break;
 	case COMMAND_ERROR:
 		interpreter_set_state(STATE_ERROR);
