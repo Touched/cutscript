@@ -6,6 +6,7 @@
 #define INTERPRETER_MAX_PARAMS 6
 #define INTERPRETER_MAX_LOCAL_VARS 12
 #define INTERPRETER_MAX_GLOBAL_VARS 128
+#define CUTSCRIPT_RESULT(x) variable_set_global(0, x)
 
 enum argument_type {
 	ARG_BYTE,
