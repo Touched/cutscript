@@ -43,11 +43,12 @@
 
 @ (&u32 image, &u32 pal, &u32 local_var.index) -> [local_var.index] --> true
 @ creates an OAM given pointers to pal and image. Put's it's ID in local var index
-.macro cs_create_oam image, pal, var
+.macro cs_create_oam image, x, y, unknown_priority_maybe
 .byte 6
 .word \image
-.word \pal
-.word \var
+.word \x
+.word \y
+.byte \unknown_priority_maybe
 .endm
 
 @ (&u32 local_var.index, u8 mode) -> void --> true

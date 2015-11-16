@@ -132,12 +132,15 @@
     - name: image
       description: "Image data"
       type: word
-    - name: pal
-      description: "Palette"
+    - name: x
+      description: "X"
       type: word
-    - name: var
-      description: "Variable"
+    - name: y
+      description: "Y"
       type: word
+    - name: unknown_priority_maybe
+      description: "priority"
+      type: byte
   description: >
     (&u32 image, &u32 pal, &u32 local_var.index) -> [local_var.index] --> true
     

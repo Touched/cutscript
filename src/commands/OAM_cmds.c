@@ -3,28 +3,26 @@
 #include "../engine/objects.h"
 #include "../engine/memory.h"
 
-void build_template (struct objtemplate objtemp, u32 *image) {
-	objtemp.tiles_tag = 0xFFFF;
-	objtemp.pal_tag = interpreter_state->pal_tag++;
-	objtemp.oam = poke_oam_battle;
-	objtemp.animation = anim_poke;
-	objtemp.graphics->graphics = (u8 *)(image);
-	objtemp.graphics->size = (u32)(*(image +1));
-	objtemp.rotscale = rotscale_empty;
-	objtemp.callback = oac_nullsub; 
+void build_template (struct objtemplate *objtemp, u32 *image) {
+	objtemp->tiles_tag = 0;
+	objtemp->pal_tag = interpreter_state->pal_tag++;
+	objtemp->oam = poke_oam_battle;
+	objtemp->animation = anim_poke;
+	objtemp->graphics->graphics = (u8 *)(image);
+	objtemp->graphics->size = (u32)(*(image +1));
+	objtemp->rotscale = rotscale_empty;
+	objtemp->callback = oac_nullsub; 
 }
 
 
 enum command_return_value command_create_oam(u32 *args) {
 	struct objtemplate *objtemp = (struct objtemplate *) malloc(sizeof(struct objtemplate));
-	build_template(*objtemp, (u32 *)args[0]);
+	build_template(objtemp, (u32 *)args[0]);
 	CUTSCRIPT_RESULT(
 	template_instanciate_forward_search(objtemp, args[1], args[2], args[3]));
 
 	return COMMAND_FINISHED;
 }
-
-
 
 enum command_return_value command_oam_move(u32 *args) {
 	/*set new x/y position*/
