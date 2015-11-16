@@ -8,6 +8,13 @@ pal_fade_control = 0x02037AB8;
 map_post_load_hook = 0x03005020;
 tasks = 0x03005090;
 objects = 0x0202063C;
+objtemplate = 0x020244DC;
+poke_oam_battle = 0x0824F018;
+anim_poke = 0x082349BC;
+rotscale_empty = 0x08231CFC;
+oac_nullsub = 0x0810BB89;
+
+
 
 /*
  * Functions
@@ -58,6 +65,8 @@ gpu_sync_bg_hide = 0x080019D0|1;
 bgid_set_tilemap = 0x08001FA0|1;
 bg_vram_setup = 0x08001658|1;
 memset = 0x081E5ED8|1;
+
+template_instanciate_forward_search = 0x08006F8C|1;
 
 /*
  * Custom Data

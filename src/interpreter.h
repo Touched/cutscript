@@ -59,6 +59,12 @@ struct async_state {
 	struct async_state *next;
 };
 
+struct obj_id_list {
+	u8 tail;
+	u8 size;
+	u8 obj_used[40];
+};
+
 struct interpreter {
 	u8 *program_counter;
 	interpreter_state_func state;
@@ -69,7 +75,9 @@ struct interpreter {
 	u8 tilemap_space[4][0x1000];
 	void (*before_end_hook)(void);
 	struct async_state *async;
+	struct obj_id_list *obj_ids;
 };
+
 
 extern struct interpreter *interpreter_state;
 
