@@ -14,7 +14,7 @@
 @ scr_cursor = label
 .macro cs_goto address
 .byte 2
-.byte \address
+.word \address
 .endm
 
 @ (u16 var_ID, &u32 local_var.index) -> [local_var.index] --> true
