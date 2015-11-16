@@ -4,10 +4,6 @@
 #include "../engine/memory.h"
 
 void build_template (struct objtemplate objtemp, u32 *image) {
-	extern struct sprite * poke_oam_battle;
-	extern struct frame ** anim_poke;
-	extern struct rotscale_frame **rotscale_empty;
-	extern object_callback oac_nullsub;
 	objtemp.tiles_tag = interpreter_state->obj_ids->size;
 	objtemp.pal_tag = interpreter_state->obj_ids->size;
 	objtemp.oam = poke_oam_battle;
@@ -20,7 +16,6 @@ void build_template (struct objtemplate objtemp, u32 *image) {
 
 
 enum command_return_value command_create_oam(u32 *args) {
-	extern u8 template_instanciate_forward_search(struct objtemplate *, u8, u8, u8);
 	struct objtemplate *objtemp = (struct objtemplate *) malloc(sizeof(struct objtemplate));
 	build_template(*objtemp, (u32 *)args[0]);
 	interpreter_state->obj_ids->obj_used[interpreter_state->obj_ids->size] =
@@ -44,11 +39,22 @@ enum command_return_value command_oam_move(u32 *args) {
 
 enum command_return_value command_oam_display(u32 *args) {
 	/* show oam - redundant? */
+	u8 index = (u8) args[0];
+	u8 i = 0;
+	while (i < 40){
+		u8 current_id = *(obj_ids_to_display + i);
+		if (current_id == 0x3F){
+			*(obj_ids_to_display + i) = index;
+			return COMMAND_FINISHED;
+		}
+	}
 	return COMMAND_FINISHED;
 }
 
-enum command_return_value command_oam_del(arg_1) {
+enum command_return_value command_oam_del(u32 *args) {
 	/* delete oam */
+	u8 index = (u8) args[0];
+	obj_delete(&objects[index]);
 	return COMMAND_FINISHED;
 }
 

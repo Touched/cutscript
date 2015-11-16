@@ -13,6 +13,7 @@ poke_oam_battle = 0x0824F018;
 anim_poke = 0x082349BC;
 rotscale_empty = 0x08231CFC;
 oac_nullsub = 0x0810BB89;
+obj_ids_to_display = 0x02021800;
 
 
 
@@ -67,6 +68,7 @@ bg_vram_setup = 0x08001658|1;
 memset = 0x081E5ED8|1;
 
 template_instanciate_forward_search = 0x08006F8C|1;
+obj_delete = 0x080073DC|1;
 
 /*
  * Custom Data

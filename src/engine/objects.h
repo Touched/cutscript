@@ -85,6 +85,13 @@ struct object {
 	u8 field43;
 };
 
-struct object objects[64];
+extern struct object objects[64];
+u8 *obj_ids_to_display;
+struct sprite * poke_oam_battle;
+struct frame ** anim_poke;
+struct rotscale_frame **rotscale_empty;
+object_callback oac_nullsub;
+u8 template_instanciate_forward_search(struct objtemplate *, u8, u8, u8);
+void obj_delete(struct object *);
 
 #endif /* ENGINE_OBJECTS_H */
