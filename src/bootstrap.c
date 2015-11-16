@@ -25,12 +25,18 @@ void hook_return_to_overworld(void) {
 	set_callback2(c2_exit_to_overworld_2_switch);
 }
 
+void vblank_handler_callback(void) {
+	gpu_sprites_upload();
+	copy_queue_process();
+	gpu_pal_upload();
+}
+
 void callback_bootstrap(void) {
 	u8 i;
 	
 	/* Clean up and setup */
 	lcd_io_set(0, 0);
-	vblank_hander_set(vblank_hander_callback);
+	vblank_hander_set(vblank_handler_callback);
 	gpu_tile_bg_drop_all_sets(0);
 	bg_positions_reset();
 	callback_clear_and_init();

@@ -50,5 +50,8 @@ void bg_vram_setup(u8 layer, struct bg_config *config, u8 layers);
 void *decompress_with_fallback_maybe(u8 layer, u8* tiles, u16 size, u16 offset, u8 mode);
 void gpu_sync_bg_show(u8 layer);
 void gpu_sync_bg_hide(u8 layer);
+void gpu_sprites_upload(void);
+void copy_queue_process(void);
+void gpu_pal_upload(void);
 
 #endif /* ENGINE_VIDEO_H */
