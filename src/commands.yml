@@ -454,3 +454,60 @@
     (u32 length) -> void --> true
     
     Wait length frames
+	
+	
+#audio
+- name: play_song
+  category: 'audio'
+  arguments:
+    - name: song_id
+      description: "ID of the song, not map song"
+      type: byte
+  description: >
+    (u8 id) -> void --> true
+    
+    Play sound equivalent.
+	
+- name: play_map_song
+  category: 'audio'
+  arguments:
+    - name: song_id
+      description: "ID of the song, map song"
+      type: byte
+  description: >
+    (u8 id) -> void --> true
+    
+    set map music equivalent.
+	
+- name: check_audio
+  category: 'audio'
+  description: >
+    (void) -> global_var(0) --> true
+    
+    checksound equivalent.
+	
+
+- name: fanfare
+  category: 'audio'
+  arguments:
+    - name: fanfare_id
+      description: "ID of fanfare"
+      type: byte
+  description: >
+    (u8 id) -> void --> true
+    
+    Play fanfare and waitfanfare combined.
+	
+	
+- name: play_cry
+  category: 'audio'
+  arguments:
+    - name: species_id
+      description: "Species ID of Pokemon"
+      type: hword
+  description: >
+    (u8 id) -> void --> true
+    
+    Cry of Pokemon, easy version.
+
+	
