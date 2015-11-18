@@ -23,7 +23,7 @@ enum command_return_value command_fanfare(u32 *args) {
 	void fanfare(u8);
 	u8 fanfare_wait(void);
 	
-	if (CUTSCRIPT_GET_RESULT > 0) {
+	if (CUTSCRIPT_GET_RESULT() > 0) {
 		u8 status = fanfare_wait();
 		if (status == 1) {
 			return COMMAND_BLOCK;
@@ -33,7 +33,7 @@ enum command_return_value command_fanfare(u32 *args) {
 	} else {
 		CUTSCRIPT_RESULT(1);
 		fanfare((u8) args[0]);
-		COMMAND_BLOCK;
+		return COMMAND_BLOCK;
 	}
 }
 
