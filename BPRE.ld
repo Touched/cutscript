@@ -69,6 +69,13 @@ memset = 0x081E5ED8|1;
 template_instanciate_forward_search = 0x08006F8C|1;
 obj_delete = 0x080073DC|1;
 
+audio_play = 0x0080722CC|1;
+audio_check = 0x0806B07C|1;
+fanfare = 0x08071C60|1;
+fanfare_wait = 0x0806B0BC|1;
+current_map_music_set = 0x08071A74|1;
+cry_related = 0x08071DF0|1;
+
 /*
  * Custom Data
  */
