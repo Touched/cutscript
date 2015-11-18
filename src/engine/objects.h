@@ -20,21 +20,18 @@ struct rotscale_frame {
 struct sprite {
 	u32 y : 8;
 	u32 rotscale : 1;
-	u32 double_size;
+	u32 double_size : 1;
 	u32 obj_mode : 2;
 	u32 mosaic : 1;
 	u32 colors : 1;
 	u32 shape : 2;
 
 	u32 x : 9;
-	union {
-		u32 rotscale_param : 5;
-		struct {
-			u32 unused : 3;
-			u32 hflip : 1;
-			u32 vflip : 1;
-		};
-	};
+
+	u32 rotscale_param : 3;
+	u32 hflip : 1;
+	u32 vflip : 1;	
+
 	u32 size : 2; 
 
 	u16 char_name : 10;
