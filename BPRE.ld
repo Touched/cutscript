@@ -69,6 +69,28 @@ memset = 0x081E5ED8|1;
 template_instanciate_forward_search = 0x08006F8C|1;
 obj_delete = 0x080073DC|1;
 
+rboxid_clear_pixels = 0x0800445C|1;
+rboxid_08003FA0 =  0x08003FA0|1;
+rboxid_to_vram = 0x08003F20|1;
+something_08050DE1 = 0x08050DE0|1;
+gpu_tile_obj_alloc_tag_and_upload = 0x080086DC|1;
+gpu_tile_obj_alloc_tag_and_apply = 0x08008928|1;
+gpu_sync_bg_show = 0x080019BC|1;
+something_08050969 = 0x08050968|1;
+box_print = 0x0812E51C|1;
+sub_0800F380 = 0x0800F380|1;
+sub_0800F34C = 0x0800F34C|1;
+strcpy_xFF_terminated = 0x08008D84|1;
+sub_080F6EE4 = 0x080F6EE4|1;
+box_related_one = 0x080F6CD0|1;
+sav2_get_text_speed = 0x080F78A8|1;
+rboxid_to_vram = 0x08003F20|1;
+sub_81220D4 = 0x081220D4|1;
+box_curved = 0x080F7768|1;
+sub_080F696C = 0x080F696C|1;
+sub_08002040 = 0x08002040|1;
+gpu_sync_bg_show = 0x80019BC|1;
+
 /*
  * Custom Data
  */
